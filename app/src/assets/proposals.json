@@ -1,0 +1,27 @@
+{
+  "count": 2,
+  "next": 1,
+  "previous": null,
+  "proposals": [
+    {
+      "id": 1,
+      "code": "1",
+      "customerFullName": "João Gomes",
+      "customerEmail": "joaogomes3759@gmail.com",
+      "cellphone": "(11) 9 9999-9999",
+      "power": "5.4",
+      "price": "5000,00",
+      "date": "2021-08-01"
+    },
+    {
+      "id": 2,
+      "code": "2",
+      "customerFullName": "Douglas Santanna",
+      "customerEmail": "douglbb1@gmail.com",
+      "cellphone": "(11) 9 9999-9999",
+      "power": "3.1",
+      "price": "3000,00",
+      "date": "2022-06-02"
+    }
+  ]
+}
