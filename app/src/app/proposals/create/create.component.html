@@ -46,14 +46,19 @@
       <h3>Endereço de entrega</h3>
       <div formGroupName="address">
         <div class="row">
-          <div>
-            <mat-form-field class="medium-width">
+          <div class="col">
+            <mat-form-field class="full-width">
               <input matInput maxlength="9" placeholder="CEP" type="number" formControlName="zipCode">
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput maxlength="255" placeholder="Logradouro" type="text" formControlName="street">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput maxlength="255" placeholder="Bairro" type="text" formControlName="neighborhood">
             </mat-form-field>
           </div>
         </div>
@@ -99,7 +104,7 @@
               </div>
               <div>
                 <mat-form-field class="medium-width">
-                  <input matInput placeholder="Quantidade" type="number" formControlName="qtd">
+                  <input matInput placeholder="Quantidade" type="number" formControlName="quantity">
                 </mat-form-field>
               </div>
               <div>
@@ -121,6 +126,14 @@
           <mat-form-field class="full-width">
             <input matInput type="number" placeholder="Valor total da mão de obra" formControlName="labourValue">
             <span matTextPrefix>R$&nbsp;</span>
+          </mat-form-field>
+        </div>
+      </div>
+      <h3>Potência</h3>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="Potência do projeto" formControlName="power">
           </mat-form-field>
         </div>
       </div>
@@ -153,3 +166,6 @@
     </mat-card-actions>
   </mat-card>
 </form>
+<pre>
+  {{ proposalForm.value | json }}
+</pre>

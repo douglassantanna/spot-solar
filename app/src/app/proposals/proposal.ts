@@ -16,6 +16,7 @@ export interface ViewProposal {
 }
 export interface Proposal {
   id: number;
+  createdAt: Date;
   customerFullName: string;
   email: string;
   telephoneNumber: string;
@@ -23,6 +24,7 @@ export interface Proposal {
   totalPrice: number;
   labourValue: number;
   warranty: Warranty;
+  power: number;
   excecutionTime: number;
   address: Address;
   products: Product[];
@@ -31,6 +33,7 @@ export interface Proposal {
 export interface Address {
   zipCode: string;
   street: string;
+  neighborhood: string;
   city: string;
   state: string;
   notes: string;

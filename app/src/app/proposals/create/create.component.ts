@@ -3,6 +3,8 @@ import Swal from 'sweetalert2'
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { SpotSolarService } from 'src/app/services/spot-solar.service';
 import { Proposal } from '../proposal';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 
 
 @Component({
@@ -11,30 +13,42 @@ import { Proposal } from '../proposal';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent {
+  private dialog = inject(MatDialog);
   private spotSolarService = inject(SpotSolarService);
   private fb = inject(FormBuilder);
 
   proposalForm = this.fb.group({
     createdAt: [new Date()],
-    customerFullName: [null, Validators.required],
-    email: [null, [Validators.required, Validators.email]],
-    telephoneNumber: [null, Validators.required],
-    notes: [null, Validators.maxLength(255)],
+    customerFullName: ['douglas', Validators.required],
+    email: ['douglas@teste.com', [Validators.required, Validators.email]],
+    telephoneNumber: ['1145336969', Validators.required],
+    notes: ['', Validators.maxLength(255)],
     address: this.fb.group({
-      zipCode: [null, Validators.required],
-      street: [null, Validators.required],
-      city: [null, Validators.required],
-      state: [null, Validators.required],
-      notes: [null, Validators.maxLength(255)],
+      zipCode: ['13219110', Validators.required],
+      street: ['rua dois', Validators.required],
+      neighborhood: ['jardim das palmeiras', Validators.required],
+      city: ['jundiai', Validators.required],
+      state: ['sp', Validators.required],
+      notes: ['portao branco', Validators.maxLength(255)],
     }),
-    products: this.fb.array([]),
-    totalPriceProducts: [null, Validators.required],
+    products: this.fb.array([
+      this.fb.group({
+        name: ['cabo amarelo', Validators.required],
+        quantity: [3, Validators.required],
+      }),
+      this.fb.group({
+        name: ['painel solar', Validators.required],
+        quantity: [3, Validators.required],
+      }),
+    ]),
+    power: [3.9, Validators.required],
+    totalPriceProducts: [1500, Validators.required],
     totalPrice: [null],
-    labourValue: [null, Validators.required],
-    excecutionTime: [null, Validators.required],
+    labourValue: [3500, Validators.required],
+    excecutionTime: [3, Validators.required],
     warranty: this.fb.group({
-      qtd: [null, Validators.required],
-      type: [null, Validators.required],
+      qtd: [20, Validators.required],
+      type: [1, Validators.required],
     }),
   });
 
@@ -55,45 +69,14 @@ export class CreateComponent {
   addProduct(): void {
     const product = this.fb.group({
       name: [null, Validators.required],
-      qtd: [null, Validators.required],
+      quantity: [null, Validators.required],
     });
     this.products.push(product);
   }
   removeProduct(index: number): void {
     this.products.removeAt(index);
   }
-  private createProposal() {
-    this.spotSolarService
-      .createProposal(this.proposalForm.value)
-      .subscribe({
-        next: (proposal: Proposal) => {
-          Swal.fire({
-            title: 'Proposta criada com sucesso!',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonText: 'Ok',
-            showDenyButton: true,
-            denyButtonColor: '#3085d6',
-            denyButtonText: 'Baixar proposta em PDF',
-          })
-        },
-        error: (err) => {
-          Swal.fire({
-            title: 'Erro ao criar proposta!',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonText: 'Ok',
-          })
-        }
-      });
 
-  }
-  private sumTotalPrice(): number {
-    let sum = 0;
-    this.labourValue.value ? sum += this.labourValue.value : sum += 0;
-    this.totalPriceProducts.value ? sum += this.totalPriceProducts.value : sum += 0;
-    return sum;
-  }
   get notes() {
     return this.proposalForm.get('notes') as FormControl;
   }
@@ -108,5 +91,60 @@ export class CreateComponent {
   }
   get products() {
     return this.proposalForm.get('products') as FormArray;
+  }
+  private createProposal() {
+    Swal.fire({
+      title: 'Proposta criada com sucesso!',
+      icon: 'success',
+      showConfirmButton: true,
+      confirmButtonText: 'Ok',
+      showDenyButton: true,
+      denyButtonColor: '#3085d6',
+      denyButtonText: 'Baixar proposta em PDF',
+    }).then((result) => {
+      if (result.isDenied) {
+        this.viewProposalOnPDF();
+      }
+    });
+    // this.spotSolarService
+    //   .createProposal(this.proposalForm.value)
+    //   .subscribe({
+    //     next: (proposal: Proposal) => {
+    //       Swal.fire({
+    //         title: 'Proposta criada com sucesso!',
+    //         icon: 'success',
+    //         showConfirmButton: true,
+    //         confirmButtonText: 'Ok',
+    //         showDenyButton: true,
+    //         denyButtonColor: '#3085d6',
+    //         denyButtonText: 'Baixar proposta em PDF',
+    //       }).then((result) => {
+    //         if (result.isDenied) {
+    //           this.viewProposalOnPDF();
+    //         }
+    //       });
+    //     },
+    //     error: (err) => {
+    //       Swal.fire({
+    //         title: 'Erro ao criar proposta!',
+    //         icon: 'error',
+    //         showCancelButton: false,
+    //         confirmButtonText: 'Ok',
+    //       })
+    //     }
+    //   });
+
+  }
+  private sumTotalPrice(): number {
+    let sum = 0;
+    this.labourValue.value ? sum += this.labourValue.value : sum += 0;
+    this.totalPriceProducts.value ? sum += this.totalPriceProducts.value : sum += 0;
+    return sum;
+  }
+  private viewProposalOnPDF(): void {
+    const dialogRef = this.dialog.open(ViewPdfComponent, {
+      data: this.proposalForm.value,
+      height: '90%',
+    })
   }
 }

@@ -1,41 +1,55 @@
 <div class="content">
-  <img src="assets/logo-spot-solar.png" alt="Logo SpotSolar">
-  <div>
-    <header>
-      <h1>Proposta de instalação de placas fotovoltaicas</h1>
-    </header>
-    <main>
-      <p>Prezado(a) {{proposal.customerFullName}},</p>
+  <button mat-stroked-button type="button" color="accent">
+    <mat-icon>download</mat-icon>
+    Baixar proposta
+  </button>
+  <header>
+    <img src="assets/logo-spot-solar.png" alt="Logo SpotSolar">
+  </header>
+  <h2 class="title">Proposta Comercial</h2>
+  <main>
+    <div class="customer">
+      <span>Cliente: {{proposal.customerFullName}}</span>
+      <span>E-mail: {{proposal.email}}</span>
+      <span>Endereço: {{proposal.address.street}}, {{proposal.address.neighborhood}}, {{proposal.address.city}} -
+        {{proposal.address.state}}</span>
+    </div>
 
-      <p>Agradecemos pelo seu interesse em nossos serviços de instalação de placas fotovoltaicas. Segue abaixo a nossa
-        proposta para a instalação do sistema em sua empresa:</p>
+    <table mat-table [dataSource]="proposal.products" class="mat-elevation-z1">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Produto </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
 
-      <ol>
-        <li>Levantamento técnico: faremos uma visita técnica ao local para avaliar a viabilidade da instalação e
-          dimensionar o sistema de acordo com as suas necessidades e perfil de consumo.</li>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
 
-        <li>Projeto e instalação: após o levantamento técnico, realizaremos o projeto do sistema, incluindo o
-          dimensionamento das placas e dos equipamentos, bem como a instalação de todos os componentes necessários.</li>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-        <li>Treinamento: oferecemos treinamento para a equipe responsável pela manutenção do sistema, visando garantir o
-          bom funcionamento e a durabilidade do sistema instalado.</li>
+    <div class="extra">
+      <span>Valor total: {{proposal.totalPrice | currency}}</span>
+      <span>Potência do sistema: {{proposal.power}} kWp</span>
+      <span>Prazo de execução: {{proposal.excecutionTime}} dias</span>
+      <span>Garantia do serviço: {{proposal.warranty.qtd}} {{proposal.warranty.type == 1 ? 'meses' :
+        'anos'}}</span>
+      <span>Caso tenha alguma dúvida ou precise de mais informações, por favor, entre em contato conosco.</span>
+      <span>Jundiaí, {{ proposal.createdAt | date:'dd' }} de {{ proposal.createdAt | date:'MMMM' }} de
+        {{ proposal.createdAt | date:'yyyy' }}.</span>
+    </div>
 
-        <li>Homologação: após a instalação, procederemos com os testes e a homologação junto à distribuidora de energia,
-          garantindo assim que o sistema esteja funcionando de acordo com as normas técnicas e legais.</li>
-
-        <li>Monitoramento e manutenção: oferecemos serviços de monitoramento remoto e manutenção preventiva, visando
-          garantir o bom desempenho e a durabilidade do sistema instalado.</li>
-      </ol>
-
-      <p>Valor total: R$ {{proposal.totalPrice}}</p>
-
-      <p>Prazo de execução: {{proposal.excecutionTime}} dias</p>
-
-      <p>Garantia: {{proposal.warranty.qtd}} {{proposal.warranty.type == 1 ? 'meses' : 'anos'}}</p>
-
-      <p>Caso tenha alguma dúvida ou precise de mais informações, por favor, entre em contato conosco.</p>
-
-      <p>Atenciosamente,<br>SpotSolar</p>
-    </main>
-  </div>
+    <div>
+      <p>Atenciosamente,</p>
+      <p>SpotSolar</p>
+    </div>
+  </main>
+  <footer>
+    <span>SpotSolar - Energia Solar</span>
+    <span>Rua São José dos Campos, 426 - vila Ruy Barbosa, Jundiaí - SP, 13219-110</span>
+    <span>Telefone: (11) 98299-5061</span>
+    <span>E-mail: joaogomes3759@gmail.com</span>
+  </footer>
 </div>
