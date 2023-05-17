@@ -10,84 +10,67 @@
   </header>
   <h2 class="title">Proposta Comercial</h2>
   <main>
-    <div class="customer">
-
-      <div class="customer-box1">
-        <div class="customer-header">
-          <span>Cliente:</span>
-        </div>
-        <div class="customer-header">
-          <span>E-mail:</span>
-        </div>
-        <div class="customer-header">
-          <span>Endereço:</span>
-        </div>
-      </div>
-
-      <div class="customer-box">
-        <div class="customer-row">
-          {{proposal.customerFullName}}
-        </div>
-        <div class="customer-row">
-          {{proposal.email}}
-        </div>
-        <div class="customer-row">
-          {{proposal.address.street}}, {{proposal.address.neighborhood}}, {{proposal.address.city}} -
-          {{proposal.address.state}}
-        </div>
-      </div>
-    </div>
-
-    <div class="extra">
-      <div class="extra-box1">
-        <div class="extra-header">
-          <span>Potência do sistema:</span>
-        </div>
-        <div class="extra-header">
-          <span>Prazo de execução:</span>
-        </div>
-        <div class="extra-header">
-          <span>Garantia do serviço:</span>
-        </div>
-        <div class="extra-header">
-          <span>Forma de pagamento:</span>
-        </div>
-      </div>
-
-      <div class="extra-box">
-        <div class="extra-row">
-          {{proposal.power}} kWp
-        </div>
-        <div class="extra-row">
-          {{proposal.excecutionTime}} dias
-        </div>
-        <div class="extra-row">
-          {{proposal.warranty.qtd}} {{proposal.warranty.type == 1 ? 'meses' :
-          'anos'}}
-        </div>
-        <div class="extra-row">
-          12x no cartão, à vista, ou financiamento em até 370x
-        </div>
-      </div>
-    </div>
-
-    <table mat-table [dataSource]="proposal.products" class="mat-elevation-z1">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Produto </th>
-        <td mat-cell *matCellDef="let element;" [ngClass]="{'highlight': printPDF == element.id}"> {{element.name}}
-        </td>
-        <td mat-footer-cell *matFooterCellDef> Total </td>
-      </ng-container>
-
-      <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-        <td mat-footer-cell *matFooterCellDef> {{proposal.totalPrice | currency}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    <table>
+      <tr>
+        <th>Dados da cliente</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Nome</td>
+        <td> {{proposal.customerFullName}}</td>
+      </tr>
+      <tr>
+        <td>E-mail</td>
+        <td> {{proposal.email}}</td>
+      </tr>
+      <tr>
+        <td>Endereço</td>
+        <td>{{proposal.address.street}}, {{proposal.address.neighborhood}}, {{proposal.address.city}} -
+          {{proposal.address.state}}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Dados da instalação</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Potência do sistema</td>
+        <td>{{proposal.power}} kWp</td>
+      </tr>
+      <tr>
+        <td>Prazo de execução</td>
+        <td>{{proposal.excecutionTime}} dias</td>
+      </tr>
+      <tr>
+        <td>Garantia do serviço</td>
+        <td>{{proposal.warranty.qtd}} {{proposal.warranty.type == 1 ? 'meses' :
+          'anos'}}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+      </tr>
+      <tr *ngFor="let element of proposal.products">
+        <td>{{ element.name }}</td>
+        <td>{{ element.quantity }}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Valores</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Forma de pagamento</td>
+        <td> 12x no cartão, à vista, ou financiamento em até 370x</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{ proposal.totalPrice | currency }}</td>
+      </tr>
     </table>
 
     <span>Caso tenha alguma dúvida ou precise de mais informações, por favor, entre em contato conosco.</span>
