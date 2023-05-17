@@ -15,22 +15,20 @@ header{
   justify-content: center;
   gap: 8px;
 }
-.customer,.products,main,.extra{
+main{
   display: flex;
   flex-direction: column;
-}
-main,.extra{
   gap: 30px;
 }
 table {
-  width: 100%;
+  max-width: 300px;
 }
 footer{
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   padding: 10px;
-  border-top: 1px solid #000;
+  border-top: 1px solid #777777;
   justify-content: flex-end;
 }
 .title{
@@ -39,4 +37,36 @@ footer{
 }
 .mat-column-quantity{
   width: 50px;
+}
+.customer,.extra{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.extra-box,.customer-box{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  width: 70%;
+  justify-content: flex-start;
+}
+.extra-box1,.customer-box1{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  width: 30%;
+  justify-content: flex-start;
+}
+.extra-header,.customer-header{
+  background-color:#eceef1;
+  border-bottom: 1px solid #777777;
+  display: flex;
+  width: 100%;
+}
+.extra-row,.customer-row{
+  width: 100%;
+  border-bottom: 1px solid #777777;
+  display: flex;
 }

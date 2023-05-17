@@ -108,7 +108,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <button mat-stroked-button color="accent" (click)="removeProduct(i)">Remover</button>
+                <button mat-raised-button color="warn" (click)="removeProduct(i)">Remover</button>
               </div>
             </div>
           </div>
@@ -166,6 +166,3 @@
     </mat-card-actions>
   </mat-card>
 </form>
-<pre>
-  {{ proposalForm.value | json }}
-</pre>

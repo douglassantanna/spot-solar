@@ -100,7 +100,7 @@ export class CreateComponent {
       confirmButtonText: 'Ok',
       showDenyButton: true,
       denyButtonColor: '#3085d6',
-      denyButtonText: 'Baixar proposta em PDF',
+      denyButtonText: 'Ver proposta',
     }).then((result) => {
       if (result.isDenied) {
         this.viewProposalOnPDF();
@@ -144,6 +144,7 @@ export class CreateComponent {
   private viewProposalOnPDF(): void {
     const dialogRef = this.dialog.open(ViewPdfComponent, {
       data: this.proposalForm.value,
+      width: '610px',
       height: '90%',
     })
   }
