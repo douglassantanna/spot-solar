@@ -1,83 +1,131 @@
 <form [formGroup]="proposalForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="shipping-card">
+  <mat-card>
     <mat-card-header>
       <mat-card-title>Nova proposta</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Nome do cliente" formControlName="customerFullName">
-            <mat-error *ngIf="proposalForm.controls['customerFullName'].hasError('required')">
-              Nome é <strong>obrigatório</strong>
-            </mat-error>
-          </mat-form-field>
+      <div formGroupName="customer">
+        <div class="row">
+          <div class="col">
+            <mat-label>Nome do cliente</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="customerFullName" required>
+              <mat-error *ngIf="customerFullName.hasError('required')">
+                Nome é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput type="email" placeholder="E-mail" formControlName="email">
-            <mat-error *ngIf="proposalForm.controls['email'].hasError('required')">
-              E-mail é <strong>obrigatório</strong>
-            </mat-error>
-            <mat-error *ngIf="proposalForm.controls['email'].hasError('email')">
-              E-mail <strong>inválido</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="N° de telefone" formControlName="telephoneNumber">
-            <mat-error *ngIf="proposalForm.controls['telephoneNumber'].hasError('required')">
-              N° de telefone é <strong>obrigatório</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <textarea matInput #notes maxlength="255" placeholder="Observação" formControlName="notes"></textarea>
-            <mat-hint align="end">{{notes.value.length}} / 255</mat-hint>
-          </mat-form-field>
+        <div class="row">
+          <div class="col">
+            <mat-label>E-mail</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="email" formControlName="email">
+              <mat-error *ngIf="email.hasError('required')">
+                E-mail é <strong>obrigatório</strong>
+              </mat-error>
+              <mat-error *ngIf="email.hasError('email')">
+                E-mail <strong>inválido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>N° de telefone</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="telephoneNumber">
+              <mat-error *ngIf="telephoneNumber.hasError('required')">
+                N° de telefone é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
       </div>
       <h3>Endereço de entrega</h3>
       <div formGroupName="address">
         <div class="row">
           <div class="col">
+            <mat-label>CEP</mat-label>
             <mat-form-field class="full-width">
-              <input matInput maxlength="9" placeholder="CEP" type="number" formControlName="zipCode">
+              <input matInput maxlength="9" type="number" formControlName="zipCode">
             </mat-form-field>
           </div>
           <div class="col">
+            <mat-label>Logradouro</mat-label>
             <mat-form-field class="full-width">
-              <input matInput maxlength="255" placeholder="Logradouro" type="text" formControlName="street">
+              <input matInput maxlength="255" type="text" formControlName="street">
             </mat-form-field>
           </div>
           <div class="col">
+            <mat-label>Bairro</mat-label>
             <mat-form-field class="full-width">
-              <input matInput maxlength="255" placeholder="Bairro" type="text" formControlName="neighborhood">
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput maxlength="255" placeholder="Cidade" type="text" formControlName="city">
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput maxlength="255" placeholder="UF" type="text" formControlName="state">
+              <input matInput maxlength="255" type="text" formControlName="neighborhood">
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col">
+            <mat-label>Cidade</mat-label>
             <mat-form-field class="full-width">
-              <input matInput maxlength="255" placeholder="Complemento" type="text" formControlName="notes">
+              <input matInput maxlength="255" type="text" formControlName="city">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>UF</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput maxlength="255" type="text" formControlName="state">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-label>Complemento</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput maxlength="255" type="text" formControlName="notes">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <h3>Serviço</h3>
+      <div formGroupName="service">
+        <div class="row">
+          <div class="col">
+            <mat-label>Tipo de serviço</mat-label>
+            <mat-form-field class="full-width">
+              <mat-select formControlName="serviceType">
+                <mat-option [value]="1">Instalação elétrica</mat-option>
+                <mat-option [value]="2">Manutenção elétrica</mat-option>
+                <mat-option [value]="3">Instalação fotovoltaica</mat-option>
+                <mat-option [value]="4">Manutenção fotovoltaica</mat-option>
+              </mat-select> </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>Tempo de excecução em dias</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="number" formControlName="excecutionTime">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-label>Período de garantia</mat-label>
+            <mat-form-field class="full-width">
+              <mat-select formControlName="warrantyType">
+                <mat-option [value]="1">Meses</mat-option>
+                <mat-option [value]="2">Anos</mat-option>
+              </mat-select> </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>Quantidade</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="number" formControlName="warrantyQtd">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-label>Potência do sistema</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="number" formControlName="power">
             </mat-form-field>
           </div>
         </div>
@@ -99,12 +147,12 @@
               <h3>{{ i + 1 }}.</h3>
               <div class="col">
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="Nome do produto" type="text" formControlName="name">
+                  <input matInput type="text" formControlName="name" placeholder="Nome do produto">
                 </mat-form-field>
               </div>
               <div>
                 <mat-form-field class="medium-width">
-                  <input matInput placeholder="Quantidade" type="number" formControlName="quantity">
+                  <input matInput type="number" formControlName="quantity" placeholder="Quantidade">
                 </mat-form-field>
               </div>
               <div>
@@ -117,46 +165,32 @@
       <h3>Valores</h3>
       <div class="row">
         <div class="col">
+          <mat-label>Valor total dos produtos</mat-label>
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Valor total dos produtos" formControlName="totalPriceProducts">
+            <input matInput type="number" formControlName="totalPriceProducts" (keyup)="sumTotalPrice()">
             <span matTextPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
         <div class="col">
+          <mat-label>Valor total da mão de obra</mat-label>
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Valor total da mão de obra" formControlName="labourValue">
+            <input matInput type="number" formControlName="labourValue" (keyup)="sumTotalPrice()">
+            <span matTextPrefix>R$&nbsp;</span>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-label>Total</mat-label>
+          <mat-form-field class="full-width">
+            <input matInput type="number" formControlName="totalPrice">
             <span matTextPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
       </div>
-      <h3>Potência</h3>
+      <h3>Observação</h3>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Potência do projeto" formControlName="power">
-          </mat-form-field>
-        </div>
-      </div>
-      <h3>Garantia</h3>
-      <div class="row" formGroupName="warranty">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <mat-select formControlName="type" placeholder="Período em">
-              <mat-option [value]="1">Meses</mat-option>
-              <mat-option [value]="2">Anos</mat-option>
-            </mat-select> </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Quantidade" formControlName="qtd">
-          </mat-form-field>
-        </div>
-      </div>
-      <h3>Tempo de execução</h3>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Tempo de excecução em dias" formControlName="excecutionTime">
+            <textarea matInput maxlength="255" formControlName="notes" placeholder="Observação"></textarea>
           </mat-form-field>
         </div>
       </div>

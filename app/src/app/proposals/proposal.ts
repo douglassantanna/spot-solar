@@ -1,3 +1,7 @@
+import { Address, Customer } from "./customer";
+import { Product } from "./product";
+import { Service } from "./service";
+
 export interface ProposalResponse {
   count: number;
   next: string;
@@ -16,37 +20,15 @@ export interface ViewProposal {
 }
 export interface Proposal {
   id: number;
-  createdAt: Date;
-  customerFullName: string;
-  email: string;
-  telephoneNumber: string;
-  notes: string;
-  totalPrice: number;
-  labourValue: number;
-  warranty: Warranty;
-  power: number;
-  excecutionTime: number;
+  customer: Customer;
+  service: Service;
   address: Address;
   products: Product[];
-}
-
-export interface Address {
-  zipCode: string;
-  street: string;
-  neighborhood: string;
-  city: string;
-  state: string;
+  createdAt: Date;
+  totalPriceProducts: number;
+  totalPrice: number;
+  labourValue: number;
   notes: string;
 }
-export interface Product {
-  name: string;
-  quantity: number;
-}
-export interface Warranty {
-  qtd: number;
-  type: WarrantyType;
-}
-export enum WarrantyType {
-  MONTHS = 1,
-  YEARS = 2
-}
+
+

@@ -17,11 +17,11 @@
       </tr>
       <tr>
         <td>Nome</td>
-        <td> {{proposal.customerFullName}}</td>
+        <td> {{proposal.customer.customerFullName}}</td>
       </tr>
       <tr>
         <td>E-mail</td>
-        <td> {{proposal.email}}</td>
+        <td> {{proposal.customer.email}}</td>
       </tr>
       <tr>
         <td>Endereço</td>
@@ -35,16 +35,23 @@
         <th></th>
       </tr>
       <tr>
+        <td>Tipo de serviço</td>
+        <td>{{proposal.service.serviceType === 1 ? 'Instalação elétrica'
+          : proposal.service.serviceType === 2 ? 'Instalação fotovoltaica'
+          : proposal.service.serviceType === 3 ? 'Manutenção elétrica'
+          : 'Manutenção fotovoltaica'}}</td>
+      </tr>
+      <tr *ngIf="proposal.service.power">
         <td>Potência do sistema</td>
-        <td>{{proposal.power}} kWp</td>
+        <td>{{proposal.service.power}} kWp</td>
       </tr>
       <tr>
         <td>Prazo de execução</td>
-        <td>{{proposal.excecutionTime}} dias</td>
+        <td>{{proposal.service.excecutionTime}} dias</td>
       </tr>
       <tr>
         <td>Garantia do serviço</td>
-        <td>{{proposal.warranty.qtd}} {{proposal.warranty.type == 1 ? 'meses' :
+        <td>{{proposal.service.warrantyQtd}} {{proposal.service.warrantyType == 1 ? 'meses' :
           'anos'}}</td>
       </tr>
     </table>

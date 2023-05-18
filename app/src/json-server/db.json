@@ -1,98 +1,38 @@
 {
   "proposals": [
     {
-      "id": 1,
-      "createdAt": "2023-05-11T00:00:00.000Z",
-      "customerFullName": "John Doe",
-      "email": "johndoe@example.com",
-      "telephoneNumber": "555-555-5555",
-      "notes": "Some notes about the customer",
-      "address": {
-        "zipCode": "12345",
-        "street": "123 Main St",
-        "city": "Anytown",
-        "state": "CA",
-        "notes": "Some notes about the address"
+      "id": 4,
+      "customer": {
+        "customerFullName": "Douglas Sant'Anna",
+        "email": "douglbb1@gmail.com",
+        "telephoneNumber": "+5511941012994"
       },
-      "products": [
-        {
-          "name": "Product 1",
-          "quantity": 2,
-          "price": 10.99
-        },
-        {
-          "name": "Product 2",
-          "quantity": 1,
-          "price": 5.99
-        }
-      ],
-      "totalPriceProducts": 27.97,
-      "totalPrice": 40,
-      "labourValue": 10,
-      "excecutionTime": "3 days",
-      "warranty": {
-        "qtd": 1,
-        "type": "1 year"
-      }
-    },
-    {
-      "id": 2,
-      "createdAt": "2023-05-12T00:00:00.000Z",
-      "customerFullName": "Douglas Santanna",
-      "email": "douglbb1@gmail.com@example.com",
-      "telephoneNumber": "555-555-5555",
-      "notes": "Some notes about the customer",
-      "address": {
-        "zipCode": "12345",
-        "street": "123 Main St",
-        "city": "Anytown",
-        "state": "CA",
-        "notes": "Some notes about the address"
+      "service": {
+        "serviceType": 3,
+        "warrantyType": 1,
+        "warrantyQtd": 1,
+        "excecutionTime": 20,
+        "power": 0
       },
-      "products": [
-        {
-          "name": "Product 1",
-          "quantity": 2,
-          "price": 10.99
-        },
-        {
-          "name": "Product 2",
-          "quantity": 1,
-          "price": 5.99
-        }
-      ],
-      "totalPriceProducts": 27.97,
-      "totalPrice": 40,
-      "labourValue": 10,
-      "excecutionTime": "3 days",
-      "warranty": {
-        "qtd": 1,
-        "type": "1 year"
-      }
-    },
-    {
-      "customerFullName": "Ramon Souza",
-      "email": "douglbb1@gmail.com",
-      "telephoneNumber": "+5511941012994",
-      "notes": null,
       "address": {
         "zipCode": 13219110,
-        "street": "nambi",
-        "city": "Sao Paulo",
-        "state": "mg",
-        "notes": null
+        "street": "  Rua São José dos Campos",
+        "neighborhood": "Rui Barbosa",
+        "city": "Jundiaí",
+        "state": " SP",
+        "notes": " "
       },
-      "products": [],
-      "totalPriceProducts": 7850,
-      "totalPrice": 11500,
-      "labourValue": 3650,
-      "excecutionTime": 20,
-      "warranty": {
-        "qtd": 3,
-        "type": 1
-      },
-      "createdAt": "2023-05-13T00:00:00.000Z",
-      "id": 3
+      "products": [
+        {
+          "name": "teste",
+          "quantity": 2
+        }
+      ],
+      "createdAt": "2023-05-18T01:07:02.902Z",
+      "totalPriceProducts": 500,
+      "labourValue": 1600,
+      "totalPrice": 2100,
+      "notes": ""
     }
   ]
 }
