@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
-import { Proposal } from '../proposals/proposal';
+import { Proposal } from '../interfaces/proposal';
 
 const url = `${environment.urlApi}/proposals`;
 @Injectable({

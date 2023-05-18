@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { SpotSolarService } from 'src/app/services/spot-solar.service';
 
-import { Proposal } from '../proposal';
+import { Proposal } from '../../interfaces/proposal';
 
 @Component({
   selector: 'app-view',
@@ -22,5 +22,9 @@ export class ViewComponent {
       .subscribe((data: Proposal[]) => {
         this.dataSource = data;
       });
+  }
+  editProposal(proposal: Proposal) {
+    console.log(proposal);
+
   }
 }

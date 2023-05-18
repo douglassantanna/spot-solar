@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Proposal } from '../proposal';
+import { Proposal } from '../../interfaces/proposal';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { jsPDF } from "jspdf";
 import { ElementRef, ViewChild } from '@angular/core';

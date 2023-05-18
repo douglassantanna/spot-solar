@@ -5,7 +5,7 @@ import { GeneralObject } from 'src/app/interfaces/general-object';
 import { SpotSolarService } from 'src/app/services/spot-solar.service';
 import Swal from 'sweetalert2';
 
-import { Proposal } from '../proposal';
+import { Proposal } from '../../interfaces/proposal';
 import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 
 
