@@ -28,6 +28,7 @@ export interface Proposal {
   totalPriceProducts: number;
   totalPrice: number;
   labourValue: number;
+  paymentMethod: string;
   notes: string;
 }
 

@@ -8,7 +8,7 @@
   <header>
     <img src="assets/logo-spot-solar.png" alt="Logo SpotSolar">
   </header>
-  <h2 class="title">Proposta Comercial</h2>
+  <h2 class="title">Proposta Comercial nº {{proposal.id}}</h2>
   <main>
     <table>
       <tr>
@@ -72,7 +72,7 @@
       </tr>
       <tr>
         <td>Forma de pagamento</td>
-        <td> 12x no cartão, à vista, ou financiamento em até 370x</td>
+        <td>{{ proposal.paymentMethod}}</td>
       </tr>
       <tr>
         <td>Total</td>

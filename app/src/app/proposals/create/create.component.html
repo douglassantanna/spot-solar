@@ -186,11 +186,22 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Forma de pagamento</mat-label>
+            <mat-select formControlName="paymentMethod" multiple>
+              <mat-option *ngFor="let item of paymentMethods" [value]="item.value">{{item.value}}</mat-option>
+            </mat-select>
+            <mat-hint>{{proposalForm.get('paymentMethod')?.value | json }}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
       <h3>Observação</h3>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <textarea matInput maxlength="255" formControlName="notes" placeholder="Observação"></textarea>
+            <textarea matInput maxlength="255" formControlName="notes"></textarea>
           </mat-form-field>
         </div>
       </div>

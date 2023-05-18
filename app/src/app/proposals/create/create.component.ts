@@ -1,9 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
-import Swal from 'sweetalert2'
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { SpotSolarService } from 'src/app/services/spot-solar.service';
-import { Proposal } from '../proposal';
 import { MatDialog } from '@angular/material/dialog';
+import { GeneralObject } from 'src/app/interfaces/general-object';
+import { SpotSolarService } from 'src/app/services/spot-solar.service';
+import Swal from 'sweetalert2';
+
+import { Proposal } from '../proposal';
 import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 
 
@@ -19,7 +21,12 @@ export class CreateComponent implements OnInit {
   private dialog = inject(MatDialog);
   private spotSolarService = inject(SpotSolarService);
   private fb = inject(FormBuilder);
-
+  paymentMethods: GeneralObject[] = [
+    { id: 1, value: 'PIX' },
+    { id: 2, value: 'Boleto' },
+    { id: 3, value: 'Cartão de Crédito até 12x' },
+    { id: 4, value: 'Financiado em até 370x' },
+  ];
   proposalForm = this.fb.group({
     id: [0],
     customer: this.fb.group({
@@ -48,6 +55,7 @@ export class CreateComponent implements OnInit {
     labourValue: [null, Validators.required],
     totalPrice: [0, Validators.required],
     notes: ['', Validators.maxLength(255)],
+    paymentMethod: ['', Validators.required],
   });
 
   onSubmit(): void {
