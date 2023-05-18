@@ -6,7 +6,8 @@ import { ViewPdfComponent } from './proposals/view-pdf/view-pdf.component';
 
 const routes: Routes = [
   { path: 'view-proposals', component: ViewComponent },
-  { path: 'create-proposal', component: CreateComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'edit/:id', component: CreateComponent },
   { path: 'view-pdf', component: ViewPdfComponent },
 ];
 

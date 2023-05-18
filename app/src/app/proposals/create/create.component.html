@@ -1,7 +1,7 @@
 <form [formGroup]="proposalForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Nova proposta</mat-card-title>
+      <mat-card-title>{{title}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div formGroupName="customer">
@@ -193,7 +193,6 @@
             <mat-select formControlName="paymentMethod" multiple>
               <mat-option *ngFor="let item of paymentMethods" [value]="item.value">{{item.value}}</mat-option>
             </mat-select>
-            <mat-hint>{{proposalForm.get('paymentMethod')?.value | json }}</mat-hint>
           </mat-form-field>
         </div>
       </div>

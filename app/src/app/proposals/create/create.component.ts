@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 import { Proposal } from '../../interfaces/proposal';
 import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -15,12 +15,13 @@ import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  ngOnInit(): void {
-    this.sumTotalPrice();
-  }
   private dialog = inject(MatDialog);
   private spotSolarService = inject(SpotSolarService);
   private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  title = 'Nova proposta'
+  proposalId = 0;
+
   paymentMethods: GeneralObject[] = [
     { id: 1, value: 'PIX' },
     { id: 2, value: 'Boleto' },
@@ -51,21 +52,78 @@ export class CreateComponent implements OnInit {
     }),
     products: this.fb.array([]),
     createdAt: [new Date()],
-    totalPriceProducts: [null, Validators.required],
-    labourValue: [null, Validators.required],
+    totalPriceProducts: [0, Validators.required],
+    labourValue: [0, Validators.required],
     totalPrice: [0, Validators.required],
     notes: ['', Validators.maxLength(255)],
     paymentMethod: ['', Validators.required],
   });
-
+  ngOnInit(): void {
+    this.editProposal();
+  }
   onSubmit(): void {
     if (this.proposalForm.valid) {
+      if (this.proposalId > 0) {
+        this.spotSolarService.updateProposal(this.proposalForm.value).subscribe({
+          next: () => { },
+          error: () => this.showMessageError(),
+        });
+      }
       this.createProposal();
     } else {
       this.showMessageError();
     }
   }
+  private editProposal() {
+    this.route.params.subscribe(params => {
+      this.proposalId = parseInt(params['id']);
+    });
 
+    if (this.proposalId > 0) {
+      this.title = 'Editar proposta'
+      this.spotSolarService.getById(this.proposalId).subscribe({
+        next: (proposal: Proposal) => {
+          proposal.products.forEach(item => {
+            const product = this.fb.group({
+              name: [item.name, Validators.required],
+              quantity: [item.quantity, Validators.required],
+            });
+            this.products.push(product);
+          });
+          this.proposalForm.patchValue({
+            id: proposal?.id,
+            customer: {
+              customerFullName: proposal?.customer?.customerFullName,
+              email: proposal?.customer?.email,
+              telephoneNumber: proposal?.customer?.telephoneNumber,
+            },
+            service: {
+              serviceType: proposal?.service?.serviceType,
+              warrantyType: proposal?.service?.warrantyType,
+              warrantyQtd: proposal?.service?.warrantyQtd,
+              excecutionTime: proposal?.service?.excecutionTime,
+              power: proposal?.service?.power,
+            },
+            address: {
+              zipCode: proposal?.address?.zipCode,
+              street: proposal?.address?.street,
+              neighborhood: proposal?.address?.neighborhood,
+              city: proposal?.address?.city,
+              state: proposal?.address?.state,
+              notes: proposal?.address?.notes,
+            },
+            products: proposal?.products,
+            createdAt: proposal?.createdAt,
+            totalPriceProducts: proposal?.totalPriceProducts,
+            labourValue: proposal?.labourValue,
+            totalPrice: proposal?.totalPrice,
+            notes: proposal?.notes,
+            paymentMethod: proposal?.paymentMethod,
+          });
+        },
+      });
+    }
+  }
   addProduct(): void {
     const product = this.fb.group({
       name: [null, Validators.required],
@@ -82,6 +140,7 @@ export class CreateComponent implements OnInit {
     this.totalPriceProducts.value ? sum += this.totalPriceProducts.value : sum += 0;
     this.totalPrice.setValue(sum);
   }
+
   private createProposal() {
     this.spotSolarService
       .createProposal(this.proposalForm.value)

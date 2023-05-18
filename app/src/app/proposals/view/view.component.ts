@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { SpotSolarService } from 'src/app/services/spot-solar.service';
 
 import { Proposal } from '../../interfaces/proposal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -12,7 +13,10 @@ export class ViewComponent {
   displayedColumns = ['id', 'customerFullName', 'email', 'telephoneNumber', 'totalPrice', 'createdAt', 'actions'];
   dataSource: Proposal[] = [];
   signalDataSource = signal<any[]>([]);
-  constructor(private spotService: SpotSolarService) {
+  private spotService = inject(SpotSolarService);
+  private router = inject(Router);
+
+  constructor() {
     this.getProposals();
   }
 
@@ -24,7 +28,6 @@ export class ViewComponent {
       });
   }
   editProposal(proposal: Proposal) {
-    console.log(proposal);
-
+    this.router.navigate(['/edit', proposal.id]);
   }
 }
