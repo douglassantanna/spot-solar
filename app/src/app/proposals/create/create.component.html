@@ -167,21 +167,22 @@
         <div class="col">
           <mat-label>Valor total dos produtos</mat-label>
           <mat-form-field class="full-width">
-            <input matInput type="number" formControlName="totalPriceProducts" (keyup)="sumTotalPrice()">
+            <input matInput type="text" mask="separator.0" formControlName="totalPriceProducts"
+              (keyup)="sumTotalPrice()">
             <span matTextPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-label>Valor total da mão de obra</mat-label>
           <mat-form-field class="full-width">
-            <input matInput type="number" formControlName="labourValue" (keyup)="sumTotalPrice()">
+            <input matInput type="text" mask="separator.0" formControlName="labourValue" (keyup)="sumTotalPrice()">
             <span matTextPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-label>Total</mat-label>
           <mat-form-field class="full-width">
-            <input matInput type="number" formControlName="totalPrice">
+            <input matInput type="text" mask="separator.0" formControlName="totalPrice" readonly>
             <span matTextPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
@@ -206,7 +207,12 @@
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" type="submit">Salvar</button>
+      <button *ngIf="!isLoading;else loading" mat-raised-button color="primary" type="submit">Salvar</button>
     </mat-card-actions>
   </mat-card>
 </form>
+<ng-template #loading>
+  <button mat-raised-button type="button" color="primary">
+    <mat-spinner color="accent" [diameter]="20"></mat-spinner>
+  </button>
+</ng-template>

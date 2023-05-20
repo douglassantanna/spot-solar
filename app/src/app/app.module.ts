@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
@@ -26,6 +27,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { CreateComponent } from './proposals/create/create.component';
 import { ViewPdfComponent } from './proposals/view-pdf/view-pdf.component';
 import { ViewComponent } from './proposals/view/view.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
 
 registerLocaleData(localePt);
 
@@ -35,7 +37,7 @@ registerLocaleData(localePt);
     NavComponent,
     ViewComponent,
     CreateComponent,
-    ViewPdfComponent
+    ViewPdfComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,15 +57,21 @@ registerLocaleData(localePt);
     MatCardModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
+    provideNgxMask(),
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule { }

@@ -21,7 +21,7 @@ export class CreateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   title = 'Nova proposta'
   proposalId = 0;
-
+  isLoading = false;
   paymentMethods: GeneralObject[] = [
     { id: 1, value: 'PIX' },
     { id: 2, value: 'Boleto' },
@@ -64,10 +64,7 @@ export class CreateComponent implements OnInit {
   onSubmit(): void {
     if (this.proposalForm.valid) {
       if (this.proposalId > 0) {
-        this.spotSolarService.updateProposal(this.proposalForm.value).subscribe({
-          next: () => { },
-          error: () => this.showMessageError(),
-        });
+        this.updateProposal();
       }
       this.createProposal();
     } else {
@@ -75,52 +72,16 @@ export class CreateComponent implements OnInit {
     }
   }
   private editProposal() {
-    this.route.params.subscribe(params => {
-      this.proposalId = parseInt(params['id']);
-    });
-
+    this.getIdFromParams();
     if (this.proposalId > 0) {
       this.title = 'Editar proposta'
       this.spotSolarService.getById(this.proposalId).subscribe({
         next: (proposal: Proposal) => {
-          proposal.products.forEach(item => {
-            const product = this.fb.group({
-              name: [item.name, Validators.required],
-              quantity: [item.quantity, Validators.required],
-            });
-            this.products.push(product);
-          });
-          this.proposalForm.patchValue({
-            id: proposal?.id,
-            customer: {
-              customerFullName: proposal?.customer?.customerFullName,
-              email: proposal?.customer?.email,
-              telephoneNumber: proposal?.customer?.telephoneNumber,
-            },
-            service: {
-              serviceType: proposal?.service?.serviceType,
-              warrantyType: proposal?.service?.warrantyType,
-              warrantyQtd: proposal?.service?.warrantyQtd,
-              excecutionTime: proposal?.service?.excecutionTime,
-              power: proposal?.service?.power,
-            },
-            address: {
-              zipCode: proposal?.address?.zipCode,
-              street: proposal?.address?.street,
-              neighborhood: proposal?.address?.neighborhood,
-              city: proposal?.address?.city,
-              state: proposal?.address?.state,
-              notes: proposal?.address?.notes,
-            },
-            products: proposal?.products,
-            createdAt: proposal?.createdAt,
-            totalPriceProducts: proposal?.totalPriceProducts,
-            labourValue: proposal?.labourValue,
-            totalPrice: proposal?.totalPrice,
-            notes: proposal?.notes,
-            paymentMethod: proposal?.paymentMethod,
-          });
+          this.fillFormWhenEdit(proposal);
         },
+        error: () => {
+          this.showMessageError();
+        }
       });
     }
   }
@@ -140,12 +101,30 @@ export class CreateComponent implements OnInit {
     this.totalPriceProducts.value ? sum += this.totalPriceProducts.value : sum += 0;
     this.totalPrice.setValue(sum);
   }
-
+  private updateProposal() {
+    this.isLoading = true;
+    this.spotSolarService.updateProposal(this.proposalForm.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+        this.showMessageError();
+      },
+    });
+  }
+  private getIdFromParams() {
+    this.route.params.subscribe(params => {
+      this.proposalId = parseInt(params['id']);
+    });
+  }
   private createProposal() {
+    this.isLoading = true;
     this.spotSolarService
       .createProposal(this.proposalForm.value)
       .subscribe({
         next: (proposal: Proposal) => {
+          this.isLoading = false;
           Swal.fire({
             title: 'Proposta criada com sucesso!',
             icon: 'success',
@@ -161,6 +140,7 @@ export class CreateComponent implements OnInit {
           });
         },
         error: (err) => {
+          this.isLoading = false;
           Swal.fire({
             title: 'Erro ao criar proposta!',
             icon: 'error',
@@ -185,6 +165,45 @@ export class CreateComponent implements OnInit {
       width: '610px',
       height: '90%',
     })
+  }
+  private fillFormWhenEdit(proposal: Proposal) {
+    proposal.products.forEach(item => {
+      const product = this.fb.group({
+        name: [item.name, Validators.required],
+        quantity: [item.quantity, Validators.required],
+      });
+      this.products.push(product);
+    });
+    this.proposalForm.patchValue({
+      id: proposal?.id,
+      customer: {
+        customerFullName: proposal?.customer?.customerFullName,
+        email: proposal?.customer?.email,
+        telephoneNumber: proposal?.customer?.telephoneNumber,
+      },
+      service: {
+        serviceType: proposal?.service?.serviceType,
+        warrantyType: proposal?.service?.warrantyType,
+        warrantyQtd: proposal?.service?.warrantyQtd,
+        excecutionTime: proposal?.service?.excecutionTime,
+        power: proposal?.service?.power,
+      },
+      address: {
+        zipCode: proposal?.address?.zipCode,
+        street: proposal?.address?.street,
+        neighborhood: proposal?.address?.neighborhood,
+        city: proposal?.address?.city,
+        state: proposal?.address?.state,
+        notes: proposal?.address?.notes,
+      },
+      products: proposal?.products,
+      createdAt: proposal?.createdAt,
+      totalPriceProducts: proposal?.totalPriceProducts,
+      labourValue: proposal?.labourValue,
+      totalPrice: proposal?.totalPrice,
+      notes: proposal?.notes,
+      paymentMethod: proposal?.paymentMethod,
+    });
   }
   get totalPriceProducts() {
     return this.proposalForm.get('totalPriceProducts') as FormControl;

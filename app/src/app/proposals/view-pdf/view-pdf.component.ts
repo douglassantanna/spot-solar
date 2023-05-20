@@ -9,7 +9,7 @@ import { ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./view-pdf.component.scss']
 })
 export class ViewPdfComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'quantity'];
+  isLoading = false;
   @ViewChild('content') content!: ElementRef;
   constructor(
     @Inject(MAT_DIALOG_DATA) public proposal: Proposal
@@ -19,10 +19,12 @@ export class ViewPdfComponent implements OnInit {
     console.log(this.proposal)
   }
   printPDF() {
+    this.isLoading = true;
     const doc = new jsPDF('p', 'pt', 'a4');
     doc.html(this.content.nativeElement, {
       callback: (doc) => {
-        doc.save();
+        doc.save(`proposta-${this.proposal.customer.customerFullName}`);
+        this.isLoading = false;
       }
     });
   }

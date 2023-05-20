@@ -1,5 +1,6 @@
 <div style="display: flex;padding: 10px;">
-  <button style="width: 100%; padding: 10px;" mat-raised-button type="button" color="primary" (click)="printPDF()">
+  <button *ngIf="!isLoading;else loading" style="width: 100%; padding: 10px;" mat-raised-button type="button"
+    color="primary" (click)="printPDF()">
     <mat-icon>download</mat-icon>
     Baixar proposta
   </button>
@@ -103,3 +104,8 @@
     <span>E-mail: joaogomes3759@gmail.com</span>
   </footer>
 </div>
+<ng-template #loading>
+  <button mat-raised-button type="button" style="width: 100%; padding: 10px;" color="primary">
+    <mat-spinner color="accent" [diameter]="20"></mat-spinner>
+  </button>
+</ng-template>
