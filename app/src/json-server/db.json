@@ -148,6 +148,321 @@
         "Cartão de Crédito até 12x",
         "Financiado em até 370x"
       ]
+    },
+    {
+      "id": 8,
+      "customer": {
+        "customerFullName": "MILONI E XAVIER MERCADOS LTDA",
+        "email": "xavier@gmail.com",
+        "telephoneNumber": "(11)94791-6121"
+      },
+      "service": {
+        "serviceType": 2,
+        "warrantyType": 1,
+        "warrantyQtd": 6,
+        "excecutionTime": 3,
+        "power": 0
+      },
+      "address": {
+        "zipCode": 13212743,
+        "street": "  R VER PEDRO RIBEIRO 21 ANEXO ESQ AVADELINO MARTINS 1711",
+        "neighborhood": "  JD DAS TULIPAS",
+        "city": "  JUNDIAI",
+        "state": " SP",
+        "notes": " "
+      },
+      "products": [
+        {
+          "name": "ELETRODUTO 2\"",
+          "quantity": 4
+        },
+        {
+          "name": "CONDULETE 2\"",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA CEGA CONDULETE 2",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA REDONDA CONDULETE 2\"",
+          "quantity": 17
+        },
+        {
+          "name": "UNIDUTE 2\"",
+          "quantity": 16
+        },
+        {
+          "name": "LUVA CORRER ELETRODUTO 2\"",
+          "quantity": 5
+        },
+        {
+          "name": "PRESILHA TIPO D COM CUNHA 2\"",
+          "quantity": 12
+        },
+        {
+          "name": "PARAFUSO PHILIPS PARA BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "SPIRAFLEX 2.1/2",
+          "quantity": 5
+        },
+        {
+          "name": "CAIXA ALUMINIO SOLO 15X15 ",
+          "quantity": 1
+        },
+        {
+          "name": "HASTE ATERRAMENTO",
+          "quantity": 1
+        },
+        {
+          "name": "CONECTOR HASTE TERRA",
+          "quantity": 1
+        },
+        {
+          "name": "CABO NU 16MM",
+          "quantity": 2
+        },
+        {
+          "name": "CABO 25 MM PRETO ",
+          "quantity": 40
+        },
+        {
+          "name": "CABO 16MM VERDE",
+          "quantity": 20
+        },
+        {
+          "name": "DISJUNTOR TRI 80A",
+          "quantity": 1
+        },
+        {
+          "name": "DPS CLAMPER 275V 12 A 60KA",
+          "quantity": 3
+        }
+      ],
+      "createdAt": "2023-05-18T16:25:45.123Z",
+      "totalPriceProducts": 3111,
+      "labourValue": 1980,
+      "totalPrice": 5091,
+      "notes": "",
+      "paymentMethod": [
+        "PIX"
+      ]
+    },
+    {
+      "id": 9,
+      "customer": {
+        "customerFullName": "MILONI E XAVIER MERCADOS LTDA",
+        "email": "xavier@gmail.com",
+        "telephoneNumber": "(11)94791-6121"
+      },
+      "service": {
+        "serviceType": 1,
+        "warrantyType": 1,
+        "warrantyQtd": 6,
+        "excecutionTime": 3,
+        "power": 0
+      },
+      "address": {
+        "zipCode": 13212743,
+        "street": "  R VER PEDRO RIBEIRO 21 ANEXO ESQ AVADELINO MARTINS 1711",
+        "neighborhood": "  JD DAS TULIPAS",
+        "city": "  JUNDIAI",
+        "state": " SP",
+        "notes": " "
+      },
+      "products": [
+        {
+          "name": "ELETRODUTO 2\"",
+          "quantity": 4
+        },
+        {
+          "name": "CONDULETE 2\"",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA CEGA CONDULETE 2",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA REDONDA CONDULETE 2\"",
+          "quantity": 17
+        },
+        {
+          "name": "UNIDUTE 2\"",
+          "quantity": 16
+        },
+        {
+          "name": "LUVA CORRER ELETRODUTO 2\"",
+          "quantity": 5
+        },
+        {
+          "name": "PRESILHA TIPO D COM CUNHA 2\"",
+          "quantity": 12
+        },
+        {
+          "name": "PARAFUSO PHILIPS PARA BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "SPIRAFLEX 2.1/2",
+          "quantity": 5
+        },
+        {
+          "name": "CAIXA ALUMINIO SOLO 15X15 ",
+          "quantity": 1
+        },
+        {
+          "name": "HASTE ATERRAMENTO",
+          "quantity": 1
+        },
+        {
+          "name": "CONECTOR HASTE TERRA",
+          "quantity": 1
+        },
+        {
+          "name": "CABO NU 16MM",
+          "quantity": 2
+        },
+        {
+          "name": "CABO 25 MM PRETO ",
+          "quantity": 40
+        },
+        {
+          "name": "CABO 16MM VERDE",
+          "quantity": 20
+        },
+        {
+          "name": "DISJUNTOR TRI 80A",
+          "quantity": 1
+        },
+        {
+          "name": "DPS CLAMPER 275V 12 A 60KA",
+          "quantity": 3
+        }
+      ],
+      "createdAt": "2023-05-18T16:25:45.123Z",
+      "totalPriceProducts": 3111,
+      "labourValue": 1980,
+      "totalPrice": 5091,
+      "notes": "",
+      "paymentMethod": [
+        "PIX"
+      ]
+    },
+    {
+      "id": 10,
+      "customer": {
+        "customerFullName": "MILONI E XAVIER MERCADOS LTDA",
+        "email": "xavier@gmail.com",
+        "telephoneNumber": "(11)94791-6121"
+      },
+      "service": {
+        "serviceType": 3,
+        "warrantyType": 1,
+        "warrantyQtd": 6,
+        "excecutionTime": 3,
+        "power": 0
+      },
+      "address": {
+        "zipCode": 13212743,
+        "street": "  R VER PEDRO RIBEIRO 21 ANEXO ESQ AVADELINO MARTINS 1711",
+        "neighborhood": "  JD DAS TULIPAS",
+        "city": "  JUNDIAI",
+        "state": " SP",
+        "notes": " "
+      },
+      "products": [
+        {
+          "name": "ELETRODUTO 2\"",
+          "quantity": 4
+        },
+        {
+          "name": "CONDULETE 2\"",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA CEGA CONDULETE 2",
+          "quantity": 8
+        },
+        {
+          "name": "TAMPA REDONDA CONDULETE 2\"",
+          "quantity": 17
+        },
+        {
+          "name": "UNIDUTE 2\"",
+          "quantity": 16
+        },
+        {
+          "name": "LUVA CORRER ELETRODUTO 2\"",
+          "quantity": 5
+        },
+        {
+          "name": "PRESILHA TIPO D COM CUNHA 2\"",
+          "quantity": 12
+        },
+        {
+          "name": "PARAFUSO PHILIPS PARA BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "BUCHA 8MM",
+          "quantity": 40
+        },
+        {
+          "name": "SPIRAFLEX 2.1/2",
+          "quantity": 5
+        },
+        {
+          "name": "CAIXA ALUMINIO SOLO 15X15 ",
+          "quantity": 1
+        },
+        {
+          "name": "HASTE ATERRAMENTO",
+          "quantity": 1
+        },
+        {
+          "name": "CONECTOR HASTE TERRA",
+          "quantity": 1
+        },
+        {
+          "name": "CABO NU 16MM",
+          "quantity": 2
+        },
+        {
+          "name": "CABO 25 MM PRETO ",
+          "quantity": 40
+        },
+        {
+          "name": "CABO 16MM VERDE",
+          "quantity": 20
+        },
+        {
+          "name": "DISJUNTOR TRI 80A",
+          "quantity": 1
+        },
+        {
+          "name": "DPS CLAMPER 275V 12 A 60KA",
+          "quantity": 3
+        }
+      ],
+      "createdAt": "2023-05-18T16:25:45.123Z",
+      "totalPriceProducts": 3111,
+      "labourValue": 1980,
+      "totalPrice": 5091,
+      "notes": "",
+      "paymentMethod": [
+        "PIX"
+      ]
     }
   ]
 }

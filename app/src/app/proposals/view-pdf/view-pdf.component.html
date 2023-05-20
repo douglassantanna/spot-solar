@@ -75,6 +75,14 @@
         <td>{{ proposal.paymentMethod}}</td>
       </tr>
       <tr>
+        <td>Produtos</td>
+        <td>{{ proposal.totalPriceProducts | currency}}</td>
+      </tr>
+      <tr>
+        <td>Mão de obra</td>
+        <td>{{ proposal.labourValue | currency}}</td>
+      </tr>
+      <tr>
         <td>Total</td>
         <td>{{ proposal.totalPrice | currency }}</td>
       </tr>
