@@ -40,7 +40,7 @@ export class CreateComponent implements OnInit {
       warrantyType: [0, Validators.required],
       warrantyQtd: [0, Validators.required],
       excecutionTime: [0, Validators.required],
-      power: [0],
+      power: [''],
     }),
     address: this.fb.group({
       zipCode: [' ', Validators.required],

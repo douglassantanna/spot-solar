@@ -13,5 +13,5 @@ export interface Service {
   warrantyType: WarrantyType;
   warrantyQtd: number;
   excecutionTime: number;
-  power?: number;
+  power?: string;
 }
