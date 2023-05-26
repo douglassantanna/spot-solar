@@ -1,0 +1,51 @@
+@baseurl = http://localhost:7071/api
+
+###
+POST {{baseurl}}/table-output
+Content-Type: application/json
+
+{
+    "name": "Marcio Souza",
+    "email": "marcioS2@teste.com"
+}
+###
+POST {{baseurl}}/create-proposal
+Content-Type: application/json
+
+{
+      "customer": {
+        "customerFullName": "Marcio Souza",
+        "email": "marcioS2@teste.com",
+        "telephoneNumber": "1111111111"
+      },
+      "service": {
+        "serviceType": 3,
+        "warrantyType": 1,
+        "warrantyQtd": 2,
+        "excecutionTime": 4,
+        "power": "3,6"
+      },
+      "address": {
+        "zipCode": "13219110",
+        "street": "Rua Nove de Julho",
+        "neighborhood": "Centro",
+        "city": "Jundiaí",
+        "state": "SP",
+        "notes": ""
+      },
+      "products": [
+        {
+          "name": "ELETRODUTO 2",
+          "quantity": 4
+        },
+        {
+          "name": "CONDULETE 2",
+          "quantity": 8
+        }
+      ],
+      "createdAt": "2023-05-18T01:26:54.582Z",
+      "totalPriceProducts": 1234,
+      "labourValue": 54321,
+      "totalPrice": 55555,
+      "notes": ""
+    },
