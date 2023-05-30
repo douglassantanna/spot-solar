@@ -8,6 +8,8 @@ using System;
 using Microsoft.WindowsAzure.Storage;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using Azure.Data.Tables;
+using Azure;
 
 namespace api
 {
@@ -107,10 +109,26 @@ namespace api
             };
             return new OkObjectResult(customerDto);
         }
+
+        [FunctionName("GetAllCustomers")]
+        public static async Task GetAllCustomer(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get-all-customers")] HttpRequest request,
+            [Table("Customers")] TableClient tableClient,
+            ILogger log
+        )
+        {
+            AsyncPageable<CustomerDto> queryResults = tableClient.QueryAsync<CustomerDto>();
+            await foreach (CustomerDto entity in queryResults)
+            {
+                log.LogInformation($"{entity.PartitionKey}\t{entity.RowKey}\t{entity.Name}\t{entity.Email}");
+            }
+        }
+
+
     }
 }
 
-public class CustomerDto
+public class CustomerDto : ITableEntity
 {
     public CustomerDto()
     {
@@ -121,6 +139,8 @@ public class CustomerDto
     public string Email { get; set; } = string.Empty;
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
+    public DateTimeOffset? Timestamp { get; set; }
+    public ETag ETag { get; set; }
 }
 public class Customer
 {
