@@ -1,12 +1,18 @@
 @baseurl = http://localhost:7071/api
+###
+GET {{baseurl}}/get-customer-by-id/davi@teste.com/4f66cc4c-7b65-48ac-b5dd-1ba83a20067f
 
 ###
-POST {{baseurl}}/table-output
+GET {{baseurl}}/get-all-customers
+
+###
+POST {{baseurl}}/create-customer
 Content-Type: application/json
 
 {
-    "name": "Marcio Souza",
-    "email": "marcioS2@teste.com"
+    "name": "Davi Craici",
+    "email": "davi@teste.com",
+   
 }
 ###
 POST {{baseurl}}/create-proposal
