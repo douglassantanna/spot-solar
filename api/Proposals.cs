@@ -8,8 +8,8 @@ using System;
 using Microsoft.WindowsAzure.Storage;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using Azure.Data.Tables;
 using Azure;
+using Azure.Data.Tables;
 
 namespace api
 {
@@ -111,22 +111,19 @@ namespace api
         }
 
         [FunctionName("GetAllCustomers")]
-        public static async Task GetAllCustomer(
+        public static async Task<IActionResult> GetAllCustomer(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get-all-customers")] HttpRequest request,
             [Table("Customers")] TableClient tableClient,
             ILogger log
         )
         {
-            AsyncPageable<CustomerDto> queryResults = tableClient.QueryAsync<CustomerDto>();
-            await foreach (CustomerDto entity in queryResults)
-            {
-                log.LogInformation($"{entity.PartitionKey}\t{entity.RowKey}\t{entity.Name}\t{entity.Email}");
-            }
+            var emailFilter = request.Query["email"];
+            AsyncPageable<CustomerDto> queryResults = tableClient.QueryAsync<CustomerDto>(filter:$"Email eq '{emailFilter}'");
+            return new OkObjectResult(queryResults);
         }
-
-
     }
 }
+
 
 public class CustomerDto : ITableEntity
 {

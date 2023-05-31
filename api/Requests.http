@@ -1,17 +1,17 @@
-@baseurl = http://localhost:7071/api
+@baseurl = http://localhost:7161/api
 ###
 GET {{baseurl}}/get-customer-by-id/davi@teste.com/4f66cc4c-7b65-48ac-b5dd-1ba83a20067f
 
 ###
-GET {{baseurl}}/get-all-customers
+GET {{baseurl}}/get-all-customers?email=douglas@teste.com
 
 ###
 POST {{baseurl}}/create-customer
 Content-Type: application/json
 
 {
-    "name": "Davi Craici",
-    "email": "davi@teste.com",
+    "name": "José Craici",
+    "email": "jose@teste.com",
    
 }
 ###
