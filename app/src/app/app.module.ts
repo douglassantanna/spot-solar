@@ -27,7 +27,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { CreateComponent } from './proposals/create/create.component';
 import { ViewPdfComponent } from './proposals/view-pdf/view-pdf.component';
 import { ViewComponent } from './proposals/view/view.component';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { LoadingComponent } from './components/loading/loading.component'
 
 registerLocaleData(localePt);
 
@@ -38,6 +39,7 @@ registerLocaleData(localePt);
     ViewComponent,
     CreateComponent,
     ViewPdfComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

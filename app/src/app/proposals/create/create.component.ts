@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Proposal } from '../../interfaces/proposal';
 import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-create',
@@ -19,6 +20,7 @@ export class CreateComponent implements OnInit {
   private spotSolarService = inject(SpotSolarService);
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
+  public loadingService = inject(LoadingService);
   title = 'Nova proposta'
   proposalId = 0;
   isLoading = false;
@@ -43,12 +45,12 @@ export class CreateComponent implements OnInit {
       power: [''],
     }),
     address: this.fb.group({
-      zipCode: [' ', Validators.required],
-      street: ['  ', Validators.required],
-      neighborhood: ['  ', Validators.required],
-      city: ['  ', Validators.required],
-      state: [' ', Validators.required],
-      notes: [' ', Validators.maxLength(255)],
+      zipCode: ['', Validators.required],
+      street: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      notes: ['', Validators.maxLength(255)],
     }),
     products: this.fb.array([]),
     createdAt: [new Date()],
@@ -119,12 +121,12 @@ export class CreateComponent implements OnInit {
     });
   }
   private createProposal() {
-    this.isLoading = true;
+    this.loadingService.show();
     this.spotSolarService
       .createProposal(this.proposalForm.value)
       .subscribe({
         next: (proposal: Proposal) => {
-          this.isLoading = false;
+          this.loadingService.hide();
           Swal.fire({
             title: 'Proposta criada com sucesso!',
             icon: 'success',
@@ -140,7 +142,7 @@ export class CreateComponent implements OnInit {
           });
         },
         error: (err) => {
-          this.isLoading = false;
+          this.loadingService.hide();
           Swal.fire({
             title: 'Erro ao criar proposta!',
             icon: 'error',
