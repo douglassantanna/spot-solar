@@ -17,7 +17,7 @@ namespace api
     {
         [FunctionName("GetAllProposals")]
         public static async Task<IActionResult> GetAllProposals(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get-all-proposals")] HttpRequest request,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "proposal/get-all")] HttpRequest request,
             [Table("Proposals")] TableClient tableClient,
             ILogger log
         )
@@ -28,7 +28,7 @@ namespace api
         }
         [FunctionName("GetProposalById")]
         public static IActionResult GetProposalById(
-           [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get-proposal-by-id/{id}")] HttpRequest request,
+           [HttpTrigger(AuthorizationLevel.Function, "get", Route = "proposal/get-by-id/{id}")] HttpRequest request,
            [Table("Proposals", "proposals", "{id}")] Proposal proposalEntity,
            string id,
            ILogger log)
@@ -75,7 +75,7 @@ namespace api
         [FunctionName("CreateProposal")]
         [return: Table("Proposals")]
         public static Proposal Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "create-proposal")] Proposal proposalEntity,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "proposal/create-proposal")] Proposal proposalEntity,
             ILogger log)
         {
             try

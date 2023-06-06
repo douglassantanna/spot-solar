@@ -10,7 +10,6 @@ export interface ProposalResponse {
 }
 export interface ViewProposal {
   id: number;
-  code: string;
   customerFullName: string;
   customerEmail: string;
   cellphone: string;
@@ -19,17 +18,28 @@ export interface ViewProposal {
   date: string;
 }
 export interface Proposal {
-  id: number;
-  customer: Customer;
-  service: Service;
-  address: Address;
+  customerFullName: string;
+  customerEmail: string;
+  customerTelephoneNumber: string;
+  serviceType: number;
+  warrantyType: number;
+  warrantyQtd: number;
+  excecutionTime: number;
+  power: string;
+  zipCode: string;
+  street: string;
+  neighborhood: string;
+  city: string;
+  state: string;
   products: Product[];
   createdAt: Date;
   totalPriceProducts: number;
-  totalPrice: number;
   labourValue: number;
-  paymentMethod: string;
+  totalPrice: number;
   notes: string;
+  partitionKey: string;
+  rowKey: string;
+  paymentMethod: string;
 }
 
 

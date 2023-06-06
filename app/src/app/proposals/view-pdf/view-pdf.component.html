@@ -9,7 +9,7 @@
   <header>
     <img src="assets/logo-spot-solar.png" alt="Logo SpotSolar">
   </header>
-  <h2 class="title">Proposta Comercial nº {{proposal.id}}</h2>
+  <h2 class="title">Proposta Comercial nº {{proposal.rowKey}}</h2>
   <main>
     <table>
       <tr>
@@ -18,16 +18,16 @@
       </tr>
       <tr>
         <td>Nome</td>
-        <td> {{proposal.customer.customerFullName}}</td>
+        <td> {{proposal.customerFullName}}</td>
       </tr>
       <tr>
         <td>E-mail</td>
-        <td> {{proposal.customer.email}}</td>
+        <td> {{proposal.customerEmail}}</td>
       </tr>
       <tr>
         <td>Endereço</td>
-        <td>{{proposal.address.street}}, {{proposal.address.neighborhood}}, {{proposal.address.city}} -
-          {{proposal.address.state}}</td>
+        <td>{{proposal.street}}, {{proposal.neighborhood}}, {{proposal.city}} -
+          {{proposal.state}}</td>
       </tr>
     </table>
     <table>
@@ -37,22 +37,22 @@
       </tr>
       <tr>
         <td>Tipo de serviço</td>
-        <td>{{proposal.service.serviceType === 1 ? 'Instalação elétrica'
-          : proposal.service.serviceType === 2 ? 'Instalação fotovoltaica'
-          : proposal.service.serviceType === 3 ? 'Manutenção elétrica'
+        <td>{{proposal.serviceType === 1 ? 'Instalação elétrica'
+          : proposal.serviceType === 2 ? 'Instalação fotovoltaica'
+          : proposal.serviceType === 3 ? 'Manutenção elétrica'
           : 'Manutenção fotovoltaica'}}</td>
       </tr>
-      <tr *ngIf="proposal.service.power">
+      <tr *ngIf="proposal.power">
         <td>Potência do sistema</td>
-        <td>{{proposal.service.power}} kWp</td>
+        <td>{{proposal.power}} kWp</td>
       </tr>
       <tr>
         <td>Prazo de execução</td>
-        <td>{{proposal.service.excecutionTime}} dias</td>
+        <td>{{proposal.excecutionTime}} dias</td>
       </tr>
       <tr>
         <td>Garantia do serviço</td>
-        <td>{{proposal.service.warrantyQtd}} {{proposal.service.warrantyType == 1 ? 'meses' :
+        <td>{{proposal.warrantyQtd}} {{proposal.warrantyType == 1 ? 'meses' :
           'anos'}}</td>
       </tr>
     </table>

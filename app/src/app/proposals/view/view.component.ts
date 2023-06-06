@@ -27,11 +27,13 @@ export class ViewComponent {
     this.spotService
       .getProposals()
       .subscribe((data: Proposal[]) => {
+        console.log(data);
+
         this.dataSource = data;
       });
   }
   editProposal(proposal: Proposal) {
-    this.router.navigate(['/edit', proposal.id]);
+    this.router.navigate(['/edit', proposal.rowKey]);
   }
   viewPDF(proposal: Proposal) {
     const dialogRef = this.dialog.open(ViewPdfComponent, {

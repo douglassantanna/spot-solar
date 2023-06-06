@@ -23,7 +23,7 @@ export class ViewPdfComponent implements OnInit {
     const doc = new jsPDF('p', 'pt', 'a4');
     doc.html(this.content.nativeElement, {
       callback: (doc) => {
-        doc.save(`proposta-${this.proposal.customer.customerFullName}`);
+        doc.save(`proposta-${this.proposal.customerFullName}`);
         this.isLoading = false;
       }
     });

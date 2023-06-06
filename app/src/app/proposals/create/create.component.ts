@@ -31,33 +31,26 @@ export class CreateComponent implements OnInit {
     { id: 4, value: 'Financiado em até 370x' },
   ];
   proposalForm = this.fb.group({
-    id: [0],
-    customer: this.fb.group({
-      customerFullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telephoneNumber: ['', Validators.required],
-    }),
-    service: this.fb.group({
-      serviceType: [0, Validators.required],
-      warrantyType: [0, Validators.required],
-      warrantyQtd: [0, Validators.required],
-      excecutionTime: [0, Validators.required],
-      power: [''],
-    }),
-    address: this.fb.group({
-      zipCode: ['', Validators.required],
-      street: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      notes: ['', Validators.maxLength(255)],
-    }),
+    rowKey: [''],
+    customerFullName: ['', Validators.required],
+    customerEmail: ['', [Validators.required, Validators.email]],
+    customerTelephoneNumber: ['', Validators.required],
+    serviceType: [0, Validators.required],
+    warrantyType: [0, Validators.required],
+    warrantyQtd: [0, Validators.required],
+    excecutionTime: [0, Validators.required],
+    power: [''],
+    zipCode: ['', Validators.required],
+    street: ['', Validators.required],
+    neighborhood: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
+    notes: ['', Validators.maxLength(255)],
     products: this.fb.array([]),
     createdAt: [new Date()],
     totalPriceProducts: [0, Validators.required],
     labourValue: [0, Validators.required],
     totalPrice: [0, Validators.required],
-    notes: ['', Validators.maxLength(255)],
     paymentMethod: ['', Validators.required],
   });
   ngOnInit(): void {
@@ -177,33 +170,26 @@ export class CreateComponent implements OnInit {
       this.products.push(product);
     });
     this.proposalForm.patchValue({
-      id: proposal?.id,
-      customer: {
-        customerFullName: proposal?.customer?.customerFullName,
-        email: proposal?.customer?.email,
-        telephoneNumber: proposal?.customer?.telephoneNumber,
-      },
-      service: {
-        serviceType: proposal?.service?.serviceType,
-        warrantyType: proposal?.service?.warrantyType,
-        warrantyQtd: proposal?.service?.warrantyQtd,
-        excecutionTime: proposal?.service?.excecutionTime,
-        power: proposal?.service?.power,
-      },
-      address: {
-        zipCode: proposal?.address?.zipCode,
-        street: proposal?.address?.street,
-        neighborhood: proposal?.address?.neighborhood,
-        city: proposal?.address?.city,
-        state: proposal?.address?.state,
-        notes: proposal?.address?.notes,
-      },
+      rowKey: proposal?.rowKey,
+      customerFullName: proposal?.customerFullName,
+      customerEmail: proposal?.customerEmail,
+      customerTelephoneNumber: proposal?.customerTelephoneNumber,
+      serviceType: proposal?.serviceType,
+      warrantyType: proposal?.warrantyType,
+      warrantyQtd: proposal?.warrantyQtd,
+      excecutionTime: proposal?.excecutionTime,
+      power: proposal?.power,
+      zipCode: proposal?.zipCode,
+      street: proposal?.street,
+      neighborhood: proposal?.neighborhood,
+      city: proposal?.city,
+      state: proposal?.state,
+      notes: proposal?.notes,
       products: proposal?.products,
       createdAt: proposal?.createdAt,
       totalPriceProducts: proposal?.totalPriceProducts,
       labourValue: proposal?.labourValue,
       totalPrice: proposal?.totalPrice,
-      notes: proposal?.notes,
       paymentMethod: proposal?.paymentMethod,
     });
   }
@@ -219,16 +205,13 @@ export class CreateComponent implements OnInit {
   get products() {
     return this.proposalForm.get('products') as FormArray;
   }
-  get customer() {
-    return this.proposalForm.get('customer') as FormControl;
-  }
   get customerFullName() {
-    return this.customer.get('customerFullName') as FormControl;
+    return this.proposalForm.get('customerFullName') as FormControl;
   }
   get email() {
-    return this.customer.get('email') as FormControl;
+    return this.proposalForm.get('customerEmail') as FormControl;
   }
   get telephoneNumber() {
-    return this.customer.get('telephoneNumber') as FormControl;
+    return this.proposalForm.get('customerTelephoneNumber') as FormControl;
   }
 }

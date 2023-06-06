@@ -4,7 +4,7 @@
       <mat-card-title>{{title}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div formGroupName="customer">
+      <section class="customer">
         <div class="row">
           <div class="col">
             <mat-label>Nome do cliente</mat-label>
@@ -20,7 +20,7 @@
           <div class="col">
             <mat-label>E-mail</mat-label>
             <mat-form-field class="full-width">
-              <input matInput type="email" formControlName="email">
+              <input matInput type="email" formControlName="customerEmail">
               <mat-error *ngIf="email.hasError('required')">
                 E-mail é <strong>obrigatório</strong>
               </mat-error>
@@ -32,16 +32,16 @@
           <div class="col">
             <mat-label>N° de telefone</mat-label>
             <mat-form-field class="full-width">
-              <input matInput formControlName="telephoneNumber">
+              <input matInput formControlName="customerTelephoneNumber">
               <mat-error *ngIf="telephoneNumber.hasError('required')">
                 N° de telefone é <strong>obrigatório</strong>
               </mat-error>
             </mat-form-field>
           </div>
         </div>
-      </div>
-      <h3>Endereço de entrega</h3>
-      <div formGroupName="address">
+      </section>
+      <section class="address">
+        <h3>Endereço de entrega</h3>
         <div class="row">
           <div class="col">
             <mat-label>CEP</mat-label>
@@ -84,9 +84,9 @@
             </mat-form-field>
           </div>
         </div>
-      </div>
-      <h3>Serviço</h3>
-      <div formGroupName="service">
+      </section>
+      <section class="services">
+        <h3>Serviço</h3>
         <div class="row">
           <div class="col">
             <mat-label>Tipo de serviço</mat-label>
@@ -129,82 +129,88 @@
             </mat-form-field>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <h3>Produtos</h3>
+      </section>
+      <section class="products">
+        <div class="row">
+          <div class="col">
+            <h3>Produtos</h3>
+          </div>
+          <div>
+            <button color="primary" mat-raised-button type="button" (click)="addProduct()">
+              Novo produto
+            </button>
+          </div>
         </div>
-        <div>
-          <button color="primary" mat-raised-button type="button" (click)="addProduct()">
-            Novo produto
-          </button>
-        </div>
-      </div>
-      <div formArrayName="products">
-        <div *ngFor="let products of products.controls; let i = index">
-          <div [formGroupName]="i">
-            <div class="row">
-              <h3>{{ i + 1 }}.</h3>
-              <div class="col">
-                <mat-form-field class="full-width">
-                  <input matInput type="text" formControlName="name" placeholder="Nome do produto">
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field class="medium-width">
-                  <input matInput type="number" formControlName="quantity" placeholder="Quantidade">
-                </mat-form-field>
-              </div>
-              <div>
-                <button mat-raised-button color="warn" (click)="removeProduct(i)">Remover</button>
+        <div formArrayName="products">
+          <div *ngFor="let products of products.controls; let i = index">
+            <div [formGroupName]="i">
+              <div class="row">
+                <h3>{{ i + 1 }}.</h3>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" formControlName="name" placeholder="Nome do produto">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field class="medium-width">
+                    <input matInput type="number" formControlName="quantity" placeholder="Quantidade">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-raised-button color="warn" (click)="removeProduct(i)">Remover</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <h3>Valores</h3>
-      <div class="row">
-        <div class="col">
-          <mat-label>Valor total dos produtos</mat-label>
-          <mat-form-field class="full-width">
-            <input matInput type="text" mask="separator.0" formControlName="totalPriceProducts"
-              (keyup)="sumTotalPrice()">
-            <span matTextPrefix>R$&nbsp;</span>
-          </mat-form-field>
+      </section>
+      <section class="prices">
+        <h3>Valores</h3>
+        <div class="row">
+          <div class="col">
+            <mat-label>Valor total dos produtos</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="text" mask="separator.0" formControlName="totalPriceProducts"
+                (keyup)="sumTotalPrice()">
+              <span matTextPrefix>R$&nbsp;</span>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>Valor total da mão de obra</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="text" mask="separator.0" formControlName="labourValue" (keyup)="sumTotalPrice()">
+              <span matTextPrefix>R$&nbsp;</span>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-label>Total</mat-label>
+            <mat-form-field class="full-width">
+              <input matInput type="text" mask="separator.0" formControlName="totalPrice" readonly>
+              <span matTextPrefix>R$&nbsp;</span>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col">
-          <mat-label>Valor total da mão de obra</mat-label>
-          <mat-form-field class="full-width">
-            <input matInput type="text" mask="separator.0" formControlName="labourValue" (keyup)="sumTotalPrice()">
-            <span matTextPrefix>R$&nbsp;</span>
-          </mat-form-field>
+      </section>
+      <section class="payment">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Forma de pagamento</mat-label>
+              <mat-select formControlName="paymentMethod" multiple>
+                <mat-option *ngFor="let item of paymentMethods" [value]="item.value">{{item.value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col">
-          <mat-label>Total</mat-label>
-          <mat-form-field class="full-width">
-            <input matInput type="text" mask="separator.0" formControlName="totalPrice" readonly>
-            <span matTextPrefix>R$&nbsp;</span>
-          </mat-form-field>
+        <h3>Observação</h3>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput maxlength="255" formControlName="notes"></textarea>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <mat-label>Forma de pagamento</mat-label>
-            <mat-select formControlName="paymentMethod" multiple>
-              <mat-option *ngFor="let item of paymentMethods" [value]="item.value">{{item.value}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-      <h3>Observação</h3>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <textarea matInput maxlength="255" formControlName="notes"></textarea>
-          </mat-form-field>
-        </div>
-      </div>
+      </section>
     </mat-card-content>
     <mat-card-actions align="end">
       <button *ngIf="!isLoading;else loading" mat-raised-button color="primary" type="submit">Salvar</button>

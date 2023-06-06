@@ -9,7 +9,7 @@ GET {{baseurl}}/get-all-customers?email=joao@teste.com
 GET {{baseurl}}/get-all-proposals
 
 ###
-GET {{baseurl}}/get-proposal-by-id/douglas@teste.com/600537bf-bae7-4c5a-9d3e-01a5143c9e1e
+GET {{baseurl}}/get-proposal-by-id/029fa9f6-e2f3-4bf7-bd74-79793c5a1b24
 
 ###
 POST {{baseurl}}/create-customer

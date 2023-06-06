@@ -31,7 +31,7 @@ public class ProposalDTO : ITableEntity
     public string Notes { get; set; } = string.Empty;
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
-
+    public string PaymentMethod { get; set; } = string.Empty;
     public DateTimeOffset? Timestamp { get; set; }
     public ETag ETag { get; set; }
 }
