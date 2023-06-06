@@ -11,7 +11,6 @@ public class Startup : FunctionsStartup
     }
     public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
     {
-
         base.ConfigureAppConfiguration(builder);
     }
 

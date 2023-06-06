@@ -12,7 +12,7 @@ import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
-  displayedColumns = ['id', 'customerFullName', 'email', 'telephoneNumber', 'totalPrice', 'createdAt', 'actions'];
+  displayedColumns = ['customerFullName', 'customerEmail', 'customerTelephoneNumber', 'totalPrice', 'createdAt', 'actions'];
   dataSource: Proposal[] = [];
   signalDataSource = signal<any[]>([]);
   private spotService = inject(SpotSolarService);
