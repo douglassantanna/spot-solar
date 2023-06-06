@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Azure;
+using Azure.Data.Tables;
 
 namespace api.Models;
 
-public class Proposal
+public class ProposalDTO : ITableEntity
 {
-    public Proposal()
+    public ProposalDTO()
     {
     }
     public string CustomerFullName { get; set; } = string.Empty;
@@ -21,7 +23,7 @@ public class Proposal
     public string Neighborhood { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
-    public List<Product> Products { get; set; } = new List<Product>();
+    public List<ProductDTO> Products { get; set; } = new List<ProductDTO>();
     public DateTime CreatedAt { get; set; }
     public int TotalPriceProducts { get; set; }
     public int LabourValue { get; set; }
@@ -29,14 +31,16 @@ public class Proposal
     public string Notes { get; set; } = string.Empty;
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
-}
 
-public class Product
+    public DateTimeOffset? Timestamp { get; set; }
+    public ETag ETag { get; set; }
+}
+public class ProductDTO
 {
-    public Product()
+    public ProductDTO()
     {
 
     }
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
     public int Quantity { get; set; }
 }

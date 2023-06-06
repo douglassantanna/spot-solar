@@ -1,17 +1,27 @@
-@baseurl = http://localhost:7161/api
+@baseurl = http://localhost:7071/api
 ###
-GET {{baseurl}}/get-customer-by-id/davi@teste.com/4f66cc4c-7b65-48ac-b5dd-1ba83a20067f
+GET {{baseurl}}/get-customer-by-id/douglas@teste.com/600537bf-bae7-4c5a-9d3e-01a5143c9e1e
 
 ###
-GET {{baseurl}}/get-all-customers?email=douglas@teste.com
+GET {{baseurl}}/get-all-customers?email=joao@teste.com
+
+###
+GET {{baseurl}}/get-all-proposals
+
+###
+GET {{baseurl}}/get-proposal-by-id/douglas@teste.com/600537bf-bae7-4c5a-9d3e-01a5143c9e1e
 
 ###
 POST {{baseurl}}/create-customer
 Content-Type: application/json
 
 {
-    "name": "José Craici",
-    "email": "jose@teste.com",
+    "name": "João Craici",
+    "email": "joao@teste.com",
+    "document":{
+      "id":"123456",
+      "name":"cpf"
+    }
    
 }
 ###
@@ -19,39 +29,31 @@ POST {{baseurl}}/create-proposal
 Content-Type: application/json
 
 {
-      "customer": {
-        "customerFullName": "Marcio Souza",
-        "email": "marcioS2@teste.com",
-        "telephoneNumber": "1111111111"
-      },
-      "service": {
+        "customerFullName": "vitoria Souza",
+        "customerEmail": "vitoria@teste.com",
+        "customerTelephoneNumber": "1111111111",
         "serviceType": 3,
         "warrantyType": 1,
         "warrantyQtd": 2,
         "excecutionTime": 4,
-        "power": "3,6"
-      },
-      "address": {
+        "power": "3,6",
         "zipCode": "13219110",
         "street": "Rua Nove de Julho",
         "neighborhood": "Centro",
         "city": "Jundiaí",
         "state": "SP",
-        "notes": ""
-      },
-      "products": [
-        {
-          "name": "ELETRODUTO 2",
-          "quantity": 4
-        },
-        {
-          "name": "CONDULETE 2",
-          "quantity": 8
-        }
-      ],
-      "createdAt": "2023-05-18T01:26:54.582Z",
-      "totalPriceProducts": 1234,
-      "labourValue": 54321,
-      "totalPrice": 55555,
-      "notes": ""
+        "products": [
+          {
+            "name": "ELETRODUTO 2",
+            "quantity": 4
+          },
+          {
+            "name": "CONDULETE 2",
+            "quantity": 8
+          }
+        ],
+        "totalPriceProducts": 1234,
+        "labourValue": 54321,
+        "totalPrice": 55555,
+        "notes": "primeiro teste"
     },

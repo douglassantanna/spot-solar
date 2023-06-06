@@ -463,6 +463,144 @@
       "paymentMethod": [
         "PIX"
       ]
+    },
+    {
+      "id": 11,
+      "customer": {
+        "customerFullName": "MILONI E XAVIER MERCADOS LTDA",
+        "email": "xavier@gmail.com",
+        "telephoneNumber": "011 94791-6121"
+      },
+      "service": {
+        "serviceType": 2,
+        "warrantyType": 1,
+        "warrantyQtd": 3,
+        "excecutionTime": 5,
+        "power": "37,4"
+      },
+      "address": {
+        "zipCode": 13212743,
+        "street": "Rua Vereador Pedro Ribeiro, 21",
+        "neighborhood": "Jardim das Tulipas",
+        "city": "Jundiaí",
+        "state": "SP",
+        "notes": "Anexo Esquina Av.adelino Martins, 1711"
+      },
+      "products": [
+        {
+          "name": "MODULO 560W TSUN 30MM",
+          "quantity": 67
+        },
+        {
+          "name": "INVERSOR DE CORRENTE TRIFASICO 4MPPT 220V 30KW",
+          "quantity": 1
+        },
+        {
+          "name": "STRING BOX 2-4E/2-4S 1000V DC CLAMPER",
+          "quantity": 4
+        },
+        {
+          "name": "ACESSORIOS SOOLLAR CERAMICA 04MD ",
+          "quantity": 17
+        },
+        {
+          "name": "PERFIL SOOLLAR ALUMINIO 2,4MT FIB/CE",
+          "quantity": 70
+        },
+        {
+          "name": "BOBINA CABO SOLAR 6MM VERMELHO - 30MT",
+          "quantity": 4
+        },
+        {
+          "name": "BOBINA CABO SOLAR 6MM PRETO - 30MT",
+          "quantity": 4
+        },
+        {
+          "name": "MC4 MACHO E FEMEA - PROAUTO",
+          "quantity": 10
+        },
+        {
+          "name": "FRETE",
+          "quantity": 1
+        }
+      ],
+      "createdAt": "2023-06-01T23:31:45.438Z",
+      "totalPriceProducts": 75806,
+      "labourValue": 10330,
+      "totalPrice": 86136,
+      "notes": "",
+      "paymentMethod": [
+        "PIX",
+        "Boleto",
+        "Cartão de Crédito até 12x"
+      ]
+    },
+    {
+      "id": 12,
+      "customer": {
+        "customerFullName": "MILONI E XAVIER MERCADOS LTDA",
+        "email": "xavier@gmail.com",
+        "telephoneNumber": "011947916121"
+      },
+      "service": {
+        "serviceType": 2,
+        "warrantyType": 1,
+        "warrantyQtd": 3,
+        "excecutionTime": 5,
+        "power": "13,2"
+      },
+      "address": {
+        "zipCode": 13212743,
+        "street": "Rua Vereador Pedro Ribeiro, 21",
+        "neighborhood": "Jardim das Tulipas",
+        "city": "Jundiaí -",
+        "state": "SP",
+        "notes": ""
+      },
+      "products": [
+        {
+          "name": "MODULO 560W TSUN 30MM",
+          "quantity": 24
+        },
+        {
+          "name": "BOBINA CABO SOLAR 6MM VERMELHO - 30MT",
+          "quantity": 2
+        },
+        {
+          "name": "BOBINA CABO SOLAR 6MM PRETO - 30MT",
+          "quantity": 2
+        },
+        {
+          "name": "MC4 MACHO E FEMEA - PROAUTO",
+          "quantity": 5
+        },
+        {
+          "name": "STRING CLAMPER SB-1E/2E-2S-1000DC",
+          "quantity": 1
+        },
+        {
+          "name": "KIT EST + PERF SOOLLAR MD04 METALICA",
+          "quantity": 6
+        },
+        {
+          "name": "INVERSOR DE CORRENTE TRIFASICO 2MPPT 220V 15KW",
+          "quantity": 1
+        },
+        {
+          "name": "FRETE",
+          "quantity": 1
+        }
+      ],
+      "createdAt": "2023-06-01T23:45:09.717Z",
+      "totalPriceProducts": 27620,
+      "labourValue": 10330,
+      "totalPrice": 37950,
+      "notes": "",
+      "paymentMethod": [
+        "PIX",
+        "Boleto",
+        "Cartão de Crédito até 12x"
+      ]
     }
   ]
 }
