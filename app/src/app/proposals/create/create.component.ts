@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   public loadingService = inject(LoadingService);
   title = 'Nova proposta'
-  proposalId = 0;
+  proposalId = '';
   isLoading = false;
   paymentMethods: GeneralObject[] = [
     { id: 1, value: 'PIX' },
@@ -58,7 +58,7 @@ export class CreateComponent implements OnInit {
   }
   onSubmit(): void {
     if (this.proposalForm.valid) {
-      if (this.proposalId > 0) {
+      if (this.proposalId !== '') {
         this.updateProposal();
       }
       this.createProposal();
@@ -68,7 +68,7 @@ export class CreateComponent implements OnInit {
   }
   private editProposal() {
     this.getIdFromParams();
-    if (this.proposalId > 0) {
+    if (this.proposalId !== '') {
       this.title = 'Editar proposta'
       this.spotSolarService.getById(this.proposalId).subscribe({
         next: (proposal: Proposal) => {
@@ -110,7 +110,9 @@ export class CreateComponent implements OnInit {
   }
   private getIdFromParams() {
     this.route.params.subscribe(params => {
-      this.proposalId = parseInt(params['id']);
+      console.log(params);
+
+      this.proposalId = params['id'];
     });
   }
   private createProposal() {

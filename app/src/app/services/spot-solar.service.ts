@@ -13,8 +13,8 @@ export class SpotSolarService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id: number): Observable<Proposal> {
-    return this.http.get<Proposal>(`${url}/get-by-id/${id}`);
+  getById(rowKey: string): Observable<Proposal> {
+    return this.http.get<Proposal>(`${url}/get-by-id/${rowKey}`);
   }
   getProposals(): Observable<Proposal[]> {
     return this.http.get<Proposal[]>(`${url}/get-all`);

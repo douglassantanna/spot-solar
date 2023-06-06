@@ -67,7 +67,8 @@ namespace api
                 TotalPrice = proposalEntity.TotalPrice,
                 Notes = proposalEntity.Notes,
                 PartitionKey = proposalEntity.PartitionKey,
-                RowKey = proposalEntity.RowKey
+                RowKey = proposalEntity.RowKey,
+                PaymentMethod = proposalEntity.PaymentMethod
             };
             return new OkObjectResult(proposalDTO);
         }
@@ -109,7 +110,8 @@ namespace api
                     TotalPrice = proposalEntity.TotalPrice,
                     Notes = proposalEntity.Notes,
                     PartitionKey = "proposals",
-                    RowKey = Guid.NewGuid().ToString()
+                    RowKey = Guid.NewGuid().ToString(),
+                    PaymentMethod = proposalEntity.PaymentMethod
                 };
                 return proposal;
             }
