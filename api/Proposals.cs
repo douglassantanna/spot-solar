@@ -24,7 +24,6 @@ namespace api
         )
         {
             AsyncPageable<ProposalDTO> queryResults = tableClient.QueryAsync<ProposalDTO>();
-
             return new OkObjectResult(queryResults);
         }
         [FunctionName("GetProposalById")]
@@ -50,7 +49,7 @@ namespace api
             string[] paymentMethods = { };
             foreach (var paymentMethod in proposalEntity.PaymentMethods)
             {
-                paymentMethods.Append(paymentMethod);
+                paymentMethods = paymentMethods.Append(paymentMethod).ToArray();
             }
 
             var proposalDTO = new ProposalDTO
@@ -99,7 +98,7 @@ namespace api
                 string[] paymentMethods = { };
                 foreach (var paymentMethod in proposalEntity.PaymentMethods)
                 {
-                    paymentMethods.Append(paymentMethod);
+                    paymentMethods = paymentMethods.Append(paymentMethod).ToArray();
                 }
 
                 var today = DateTime.Now;
