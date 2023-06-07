@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Azure;
 using Azure.Data.Tables;
+using System.Linq;
 
 namespace api
 {
@@ -45,6 +46,13 @@ namespace api
             {
                 products.Add(new ProductDTO { Name = product.Name, Quantity = product.Quantity });
             }
+
+            string[] paymentMethods = { };
+            foreach (var paymentMethod in proposalEntity.PaymentMethods)
+            {
+                paymentMethods.Append(paymentMethod);
+            }
+
             var proposalDTO = new ProposalDTO
             {
                 CustomerFullName = proposalEntity.CustomerFullName,
@@ -68,7 +76,7 @@ namespace api
                 Notes = proposalEntity.Notes,
                 PartitionKey = proposalEntity.PartitionKey,
                 RowKey = proposalEntity.RowKey,
-                PaymentMethod = proposalEntity.PaymentMethod
+                PaymentMethods = paymentMethods
             };
             return new OkObjectResult(proposalDTO);
         }
@@ -87,6 +95,13 @@ namespace api
                 {
                     products.Add(product);
                 }
+
+                string[] paymentMethods = { };
+                foreach (var paymentMethod in proposalEntity.PaymentMethods)
+                {
+                    paymentMethods.Append(paymentMethod);
+                }
+
                 var today = DateTime.Now;
                 var proposal = new Proposal
                 {
@@ -111,7 +126,7 @@ namespace api
                     Notes = proposalEntity.Notes,
                     PartitionKey = "proposals",
                     RowKey = Guid.NewGuid().ToString(),
-                    PaymentMethod = proposalEntity.PaymentMethod
+                    PaymentMethods = paymentMethods
                 };
                 return proposal;
             }

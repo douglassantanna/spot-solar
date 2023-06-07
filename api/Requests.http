@@ -29,9 +29,9 @@ POST {{baseurl}}/proposal/create-proposal
 Content-Type: application/json
 
 {
-        "customerFullName": "vitoria Souza",
-        "customerEmail": "vitoria@teste.com",
-        "customerTelephoneNumber": "1111111111",
+        "customerFullName": "douglas santanna",
+        "customerEmail": "douglas@teste.com",
+        "customerTelephoneNumber": "11941012994",
         "serviceType": 3,
         "warrantyType": 1,
         "warrantyQtd": 2,

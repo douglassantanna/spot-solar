@@ -31,7 +31,6 @@ export class CreateComponent implements OnInit {
     { id: 4, value: 'Financiado em até 370x' },
   ];
   proposalForm = this.fb.group({
-    rowKey: [''],
     customerFullName: ['', Validators.required],
     customerEmail: ['', [Validators.required, Validators.email]],
     customerTelephoneNumber: ['', Validators.required],
@@ -45,20 +44,20 @@ export class CreateComponent implements OnInit {
     neighborhood: ['', Validators.required],
     city: ['', Validators.required],
     state: ['', Validators.required],
-    notes: ['', Validators.maxLength(255)],
     products: this.fb.array([]),
-    createdAt: [new Date()],
     totalPriceProducts: [0, Validators.required],
     labourValue: [0, Validators.required],
     totalPrice: [0, Validators.required],
-    paymentMethod: ['', Validators.required],
+    notes: ['', Validators.maxLength(255)],
+    paymentMethods: ['', Validators.required],
+    rowKey: [''],
   });
   ngOnInit(): void {
     this.editProposal();
   }
   onSubmit(): void {
     if (this.proposalForm.valid) {
-      if (this.proposalId !== '') {
+      if (this.proposalId !== undefined) {
         this.updateProposal();
       }
       this.createProposal();
@@ -68,7 +67,7 @@ export class CreateComponent implements OnInit {
   }
   private editProposal() {
     this.getIdFromParams();
-    if (this.proposalId !== '') {
+    if (this.proposalId !== undefined) {
       this.title = 'Editar proposta'
       this.spotSolarService.getById(this.proposalId).subscribe({
         next: (proposal: Proposal) => {
@@ -110,8 +109,6 @@ export class CreateComponent implements OnInit {
   }
   private getIdFromParams() {
     this.route.params.subscribe(params => {
-      console.log(params);
-
       this.proposalId = params['id'];
     });
   }
@@ -188,11 +185,10 @@ export class CreateComponent implements OnInit {
       state: proposal?.state,
       notes: proposal?.notes,
       products: proposal?.products,
-      createdAt: proposal?.createdAt,
       totalPriceProducts: proposal?.totalPriceProducts,
       labourValue: proposal?.labourValue,
       totalPrice: proposal?.totalPrice,
-      paymentMethod: proposal?.paymentMethod,
+      paymentMethods: proposal?.paymentMethods,
     });
   }
   get totalPriceProducts() {

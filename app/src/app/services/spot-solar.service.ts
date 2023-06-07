@@ -19,7 +19,12 @@ export class SpotSolarService {
   getProposals(): Observable<Proposal[]> {
     return this.http.get<Proposal[]>(`${url}/get-all`);
   }
-  createProposal(proposal: any): Observable<Proposal> {
+  createProposal(data: any): Observable<Proposal> {
+    let proposal = {
+      ...data,
+    } as Proposal;
+    console.log(proposal);
+
     return this.http.post<Proposal>(`${url}/create-proposal`, proposal);
   }
   updateProposal(proposal: any): Observable<Proposal> {

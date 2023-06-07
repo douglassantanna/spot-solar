@@ -39,7 +39,7 @@ export interface Proposal {
   notes: string;
   partitionKey: string;
   rowKey: string;
-  paymentMethod: string;
+  paymentMethods: string;
 }
 
 

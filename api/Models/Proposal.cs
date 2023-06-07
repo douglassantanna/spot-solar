@@ -29,9 +29,9 @@ public class Proposal
     public string Notes { get; set; } = string.Empty;
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
-    public string PaymentMethod { get; set; } = string.Empty;
-}
+    public string[] PaymentMethods { get; set; } = new string[] { };
 
+}
 public class Product
 {
     public Product()

@@ -32,7 +32,8 @@
           <div class="col">
             <mat-label>N° de telefone</mat-label>
             <mat-form-field class="full-width">
-              <input matInput formControlName="customerTelephoneNumber">
+              <input matInput type="text" formControlName="customerTelephoneNumber" mask="(00) 00000-0000"
+                maxlength="15">
               <mat-error *ngIf="telephoneNumber.hasError('required')">
                 N° de telefone é <strong>obrigatório</strong>
               </mat-error>
@@ -46,7 +47,7 @@
           <div class="col">
             <mat-label>CEP</mat-label>
             <mat-form-field class="full-width">
-              <input matInput maxlength="9" type="number" formControlName="zipCode">
+              <input matInput maxlength="9" type="text" mask="00000-000" formControlName="zipCode">
             </mat-form-field>
           </div>
           <div class="col">
@@ -196,7 +197,7 @@
           <div class="col">
             <mat-form-field class="full-width">
               <mat-label>Forma de pagamento</mat-label>
-              <mat-select formControlName="paymentMethod" multiple>
+              <mat-select formControlName="paymentMethods" multiple>
                 <mat-option *ngFor="let item of paymentMethods" [value]="item.value">{{item.value}}</mat-option>
               </mat-select>
             </mat-form-field>
