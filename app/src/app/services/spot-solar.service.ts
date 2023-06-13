@@ -25,7 +25,10 @@ export class SpotSolarService {
     } as Proposal;
     return this.http.post<Proposal>(`${url}/create-proposal`, proposal);
   }
-  updateProposal(proposal: any): Observable<Proposal> {
-    return this.http.put<Proposal>(`${url}/${proposal.id}`, proposal);
+  updateProposal(data: any): Observable<Proposal> {
+    let proposal = {
+      ...data,
+    } as Proposal;
+    return this.http.put<Proposal>(`${url}/update-proposal/${proposal.rowKey}`, proposal);
   }
 }

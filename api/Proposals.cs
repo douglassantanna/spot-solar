@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Azure;
 using Azure.Data.Tables;
 using System.Linq;
+using Newtonsoft.Json;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace api
 {
@@ -134,6 +136,36 @@ namespace api
                 log.LogError($"Algo deu errado. Error: {ex.Message}");
                 throw;
             }
+        }
+
+
+        [FunctionName("UpdateProposal")]
+        public static async Task<IActionResult> UpdateProposal(
+        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "proposal/update-proposal/{id}")] HttpRequest req,
+        string id,
+        [Table("Proposals")] CloudTableClient tableClient,
+        ILogger log)
+        {
+            log.LogInformation($"Atualizando proposta com ID: {id}");
+
+            // Parsear o corpo da requisição para obter os dados atualizados
+            var entity = await req.ReadAsStringAsync();
+            var updatedEntity = JsonConvert.DeserializeObject<Proposal>(entity);
+
+            // Atualizar os campos necessários da entidade existente
+            updatedEntity.PartitionKey = "proposals";
+            updatedEntity.RowKey = id;
+
+            // Obter a referência da tabela
+            var tableName = "Proposals";
+            var table = tableClient.GetTableReference(tableName);
+
+            // Substituir a entidade na tabela do Azure Storage
+            var replaceOperation = TableOperation.Replace(updatedEntity);
+            await table.ExecuteAsync(replaceOperation);
+
+            // Retornar a entidade atualizada
+            return new OkObjectResult(updatedEntity);
         }
     }
 }

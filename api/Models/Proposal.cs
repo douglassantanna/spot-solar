@@ -1,9 +1,11 @@
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
 
 namespace api.Models;
 
-public class Proposal
+public class Proposal : ITableEntity
 {
     public Proposal()
     {
@@ -30,7 +32,18 @@ public class Proposal
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
     public string[] PaymentMethods { get; set; } = new string[] { };
+    public DateTimeOffset Timestamp { get ; set; }
+    public string ETag { get ; set ; }
 
+    public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
+    {
+        throw new NotImplementedException();
+    }
 }
 public class Product
 {
