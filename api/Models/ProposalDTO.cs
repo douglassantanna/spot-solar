@@ -24,7 +24,6 @@ public class ProposalDTO : ITableEntity
     public string City { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
     public List<ProductDTO> Products { get; set; } = new List<ProductDTO>();
-    public DateTime CreatedAt { get; set; }
     public int TotalPriceProducts { get; set; }
     public int LabourValue { get; set; }
     public int TotalPrice { get; set; }

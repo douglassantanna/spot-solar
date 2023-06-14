@@ -31,7 +31,7 @@ namespace api
         [FunctionName("GetProposalById")]
         public static IActionResult GetProposalById(
            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "proposal/get-by-id/{id}")] HttpRequest request,
-           [Table("Proposals", "proposals", "{id}")] Proposal proposalEntity,
+           [Table("Proposals", "proposals", "{id}")] ProposalDTO proposalEntity,
            string id,
            ILogger log)
         {
@@ -70,7 +70,6 @@ namespace api
                 City = proposalEntity.City,
                 State = proposalEntity.State,
                 Products = products,
-                CreatedAt = proposalEntity.CreatedAt,
                 TotalPriceProducts = proposalEntity.TotalPriceProducts,
                 LabourValue = proposalEntity.LabourValue,
                 TotalPrice = proposalEntity.TotalPrice,
@@ -84,7 +83,7 @@ namespace api
 
         [FunctionName("CreateProposal")]
         [return: Table("Proposals")]
-        public static Proposal Run(
+        public static Proposal CreateProposal(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "proposal/create-proposal")] Proposal proposalEntity,
             ILogger log)
         {
@@ -103,8 +102,7 @@ namespace api
                     paymentMethods = paymentMethods.Append(paymentMethod).ToArray();
                 }
 
-                var today = DateTime.Now;
-                var proposal = new Proposal
+                var proposal = new Proposal(Guid.NewGuid().ToString(), "proposals")
                 {
                     CustomerFullName = proposalEntity.CustomerFullName,
                     CustomerEmail = proposalEntity.CustomerEmail,
@@ -120,13 +118,10 @@ namespace api
                     City = proposalEntity.City,
                     State = proposalEntity.State,
                     Products = products,
-                    CreatedAt = today,
                     TotalPriceProducts = proposalEntity.TotalPriceProducts,
                     LabourValue = proposalEntity.LabourValue,
                     TotalPrice = proposalEntity.TotalPrice,
                     Notes = proposalEntity.Notes,
-                    PartitionKey = "proposals",
-                    RowKey = Guid.NewGuid().ToString(),
                     PaymentMethods = paymentMethods
                 };
                 return proposal;
@@ -143,7 +138,7 @@ namespace api
         public static async Task<IActionResult> UpdateProposal(
         [HttpTrigger(AuthorizationLevel.Function, "put", Route = "proposal/update-proposal/{id}")] HttpRequest req,
         string id,
-        [Table("Proposals")] CloudTableClient tableClient,
+        [Table("Proposals")] TableClient tableClient,
         ILogger log)
         {
             log.LogInformation($"Atualizando proposta com ID: {id}");
@@ -152,20 +147,16 @@ namespace api
             var entity = await req.ReadAsStringAsync();
             var updatedEntity = JsonConvert.DeserializeObject<Proposal>(entity);
 
-            // Atualizar os campos necessários da entidade existente
-            updatedEntity.PartitionKey = "proposals";
-            updatedEntity.RowKey = id;
+            var entityUp = new Proposal(id, "proposals")
+            {
+                CustomerFullName = updatedEntity.CustomerFullName,
+            };
 
-            // Obter a referência da tabela
-            var tableName = "Proposals";
-            var table = tableClient.GetTableReference(tableName);
+            // Substituir a entidade na tabela
+            var response = await tableClient.UpsertEntityAsync(entityUp);
 
-            // Substituir a entidade na tabela do Azure Storage
-            var replaceOperation = TableOperation.Replace(updatedEntity);
-            await table.ExecuteAsync(replaceOperation);
-
-            // Retornar a entidade atualizada
-            return new OkObjectResult(updatedEntity);
+            //var ok = tableClient.UpsertEntityAsync(entityUp);
+            return new OkObjectResult(response);
         }
     }
 }
