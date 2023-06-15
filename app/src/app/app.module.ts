@@ -28,7 +28,10 @@ import { CreateComponent } from './proposals/create/create.component';
 import { ViewPdfComponent } from './proposals/view-pdf/view-pdf.component';
 import { ViewComponent } from './proposals/view/view.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { LoadingComponent } from './components/loading/loading.component'
+import { LoadingComponent } from './components/loading/loading.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore'
 
 registerLocaleData(localePt);
 
@@ -62,7 +65,9 @@ registerLocaleData(localePt);
     MatTooltipModule,
     MatProgressSpinnerModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [
     provideNgxMask(),

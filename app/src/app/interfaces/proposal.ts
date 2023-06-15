@@ -32,13 +32,11 @@ export interface Proposal {
   city: string;
   state: string;
   products: Product[];
-  createdAt: Date;
+  //createdAt: Date;
   totalPriceProducts: number;
   labourValue: number;
   totalPrice: number;
   notes: string;
-  partitionKey: string;
-  rowKey: string;
   paymentMethods: string;
 }
 

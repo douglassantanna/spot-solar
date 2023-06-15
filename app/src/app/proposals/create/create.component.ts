@@ -1,3 +1,4 @@
+import { Product } from './../../interfaces/product';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -50,33 +51,26 @@ export class CreateComponent implements OnInit {
     totalPrice: [0, Validators.required],
     notes: ['', Validators.maxLength(255)],
     paymentMethods: ['', Validators.required],
-    rowKey: [''],
   });
   ngOnInit(): void {
     this.editProposal();
   }
   onSubmit(): void {
-    if (this.proposalForm.valid) {
-      if (this.proposalId !== undefined) {
-        this.updateProposal();
-      }
-      this.createProposal();
-    } else {
-      this.showMessageError();
-    }
+    this.createProposal();
+    // if (this.proposalForm.valid) {
+    //   if (this.proposalId !== undefined) {
+    //     this.updateProposal();
+    //   }
+    // } else {
+    //   this.showMessageError();
+    // }
   }
   private editProposal() {
     this.getIdFromParams();
     if (this.proposalId !== undefined) {
       this.title = 'Editar proposta'
-      this.spotSolarService.getById(this.proposalId).subscribe({
-        next: (proposal: Proposal) => {
-          this.fillFormWhenEdit(proposal);
-        },
-        error: () => {
-          this.showMessageError();
-        }
-      });
+      let res = this.spotSolarService.getById(this.proposalId)
+      console.log(res.value)
     }
   }
   addProduct(): void {
@@ -95,54 +89,14 @@ export class CreateComponent implements OnInit {
     this.totalPriceProducts.value ? sum += this.totalPriceProducts.value : sum += 0;
     this.totalPrice.setValue(sum);
   }
-  private updateProposal() {
-    this.isLoading = true;
-    this.spotSolarService.updateProposal(this.proposalForm.value).subscribe({
-      next: () => {
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-        this.showMessageError();
-      },
-    });
-  }
+
   private getIdFromParams() {
     this.route.params.subscribe(params => {
       this.proposalId = params['id'];
     });
   }
   private createProposal() {
-    this.loadingService.show();
-    this.spotSolarService
-      .createProposal(this.proposalForm.value)
-      .subscribe({
-        next: (proposal: Proposal) => {
-          this.loadingService.hide();
-          Swal.fire({
-            title: 'Proposta criada com sucesso!',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonText: 'Ok',
-            showDenyButton: true,
-            denyButtonColor: '#4582DC',
-            denyButtonText: 'Baixar proposta em PDF',
-          }).then((result) => {
-            if (result.isDenied) {
-              this.viewProposalOnPDF();
-            }
-          });
-        },
-        error: (err) => {
-          this.loadingService.hide();
-          Swal.fire({
-            title: 'Erro ao criar proposta!',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonText: 'Ok',
-          })
-        }
-      });
+    this.spotSolarService.createProposal(this.proposalForm.value);
   }
   private showMessageError() {
     Swal.fire({
@@ -169,7 +123,6 @@ export class CreateComponent implements OnInit {
       this.products.push(product);
     });
     this.proposalForm.patchValue({
-      rowKey: proposal?.rowKey,
       customerFullName: proposal?.customerFullName,
       customerEmail: proposal?.customerEmail,
       customerTelephoneNumber: proposal?.customerTelephoneNumber,

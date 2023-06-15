@@ -1,9 +1,9 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { SpotSolarService } from 'src/app/services/spot-solar.service';
 
 import { Proposal } from '../../interfaces/proposal';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 
 @Component({
@@ -24,16 +24,14 @@ export class ViewComponent {
   }
 
   private getProposals() {
-    this.spotService
-      .getProposals()
-      .subscribe((data: Proposal[]) => {
-        console.log(data);
-
-        this.dataSource = data;
-      });
+    this.spotService.getProposals().subscribe(
+      (proposals) => {
+        this.dataSource = proposals;
+      }
+    )
   }
-  editProposal(proposal: Proposal) {
-    this.router.navigate(['/edit', proposal.rowKey]);
+  editProposal(proposal: any) {
+    this.router.navigate(['/edit', proposal.id]);
   }
   viewPDF(proposal: Proposal) {
     const dialogRef = this.dialog.open(ViewPdfComponent, {

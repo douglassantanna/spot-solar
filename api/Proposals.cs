@@ -150,6 +150,22 @@ namespace api
             var entityUp = new Proposal(id, "proposals")
             {
                 CustomerFullName = updatedEntity.CustomerFullName,
+                CustomerEmail = updatedEntity.CustomerEmail,
+                CustomerTelephoneNumber = updatedEntity.CustomerTelephoneNumber,
+                ServiceType = updatedEntity.ServiceType,
+                WarrantyType = updatedEntity.WarrantyType,
+                WarrantyQtd = updatedEntity.WarrantyQtd,
+                ExcecutionTime = updatedEntity.ExcecutionTime,
+                Power = updatedEntity.Power,
+                ZipCode = updatedEntity.ZipCode,
+                Street = updatedEntity.Street,
+                Neighborhood = updatedEntity.Neighborhood,
+                City = updatedEntity.City,
+                State = updatedEntity.State,
+                TotalPriceProducts = updatedEntity.TotalPriceProducts,
+                LabourValue = updatedEntity.LabourValue,
+                TotalPrice = updatedEntity.TotalPrice,
+                Notes = updatedEntity.Notes,
             };
 
             // Substituir a entidade na tabela

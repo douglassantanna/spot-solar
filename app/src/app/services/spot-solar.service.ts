@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 import { Proposal } from '../interfaces/proposal';
+import { Firestore, addDoc, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 
 const url = `${environment.urlApi}/proposal`;
 @Injectable({
@@ -11,26 +12,38 @@ const url = `${environment.urlApi}/proposal`;
 })
 export class SpotSolarService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private firestore: Firestore) { }
 
-  getById(rowKey: string): Observable<Proposal> {
-    console.log(rowKey);
+  getById(id: string): BehaviorSubject<any> {
+    const proposal$ = new BehaviorSubject<any>(null);
+    const docInstance = doc(this.firestore, 'proposals', id);
+    getDoc(docInstance)
+      .then(res => {
+        if (res.exists())
+          proposal$.next(res.data());
+      })
+      .catch((error) => {
+        proposal$.error({ error });
+      });
 
-    return this.http.get<Proposal>(`${url}/get-by-id/${rowKey}`);
+    return proposal$;
   }
-  getProposals(): Observable<Proposal[]> {
-    return this.http.get<Proposal[]>(`${url}/get-all`);
+
+  getProposals(): Observable<any> {
+    const collectionInstance = collection(this.firestore, 'proposals');
+    return collectionData(collectionInstance, { idField: 'id' })
   }
-  createProposal(data: any): Observable<Proposal> {
-    let proposal = {
-      ...data,
-    } as Proposal;
-    return this.http.post<Proposal>(`${url}/create-proposal`, proposal);
+  createProposal(data: any) {
+    const collectionInstance = collection(this.firestore, 'proposals');
+    addDoc(collectionInstance, data).then(res => { console.log(res) }).catch((error) => { console.log(error) })
   }
-  updateProposal(data: any): Observable<Proposal> {
-    let proposal = {
-      ...data,
-    } as Proposal;
-    return this.http.put<Proposal>(`${url}/update-proposal/${proposal.rowKey}`, proposal);
+  updateProposal(data: any, id: string) {
+    const docInstance = doc(this.firestore, 'proposals', id);
+    const updatedProposal = {
+      customerFullName: data.customerFullName,
+      customerEmail: data.customerEmail,
+    }
+    updateDoc(docInstance, updatedProposal).then(res => { console.log(res) }).catch((error) => { console.log(error) })
   }
 }
